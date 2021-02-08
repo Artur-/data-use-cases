@@ -5,24 +5,26 @@ import '@vaadin/vaadin-app-layout/vaadin-drawer-toggle';
 import '@vaadin/vaadin-avatar/vaadin-avatar';
 import '@vaadin/vaadin-tabs/theme/lumo/vaadin-tab';
 import '@vaadin/vaadin-tabs/theme/lumo/vaadin-tabs';
+import { routes, RouteWithTitle } from 'Frontend/routes';
 import { css, customElement, html, LitElement, property } from 'lit-element';
-import { router } from '../../index';
+import { projectName, router } from '../../index';
 
 interface MenuTab {
   route: string;
-  name: string;
+  title: string;
 }
 
 @customElement('main-view')
 export class MainView extends LitElement {
   @property({ type: Object }) location = router.location;
 
-  @property({ type: Array }) menuTabs: MenuTab[] = [
-    { route: 'hello', name: 'Hello World' },
-    { route: 'about', name: 'About' },
-  ];
+  @property({ type: Array }) menuTabs: MenuTab[] = routes[0]
+    .children!.filter((route) => (route as RouteWithTitle).title)
+    .map((viewRoute) => {
+      return { route: viewRoute.path, title: viewRoute.title || '' };
+    });
 
-  @property({ type: String }) projectName = 'data-use-cases';
+  @property({ type: String }) projectName = projectName;
 
   static get styles() {
     return [
@@ -118,7 +120,7 @@ export class MainView extends LitElement {
             ${this.menuTabs.map(
               (menuTab) => html`
                 <vaadin-tab>
-                  <a href="${router.urlForPath(menuTab.route)}" tabindex="-1">${menuTab.name}</a>
+                  <a href="${router.urlForPath(menuTab.route)}" tabindex="-1">${menuTab.title}</a>
                 </vaadin-tab>
               `
             )}
@@ -160,12 +162,6 @@ export class MainView extends LitElement {
 
   private getSelectedTabName(menuTabs: MenuTab[]): string {
     const currentTab = menuTabs.find((menuTab) => this.isCurrentLocation(menuTab.route));
-    let tabName = '';
-    if (currentTab) {
-      tabName = currentTab.name;
-    } else {
-      tabName = 'Hello World';
-    }
-    return tabName;
+    return currentTab ? currentTab.title : '';
   }
 }
