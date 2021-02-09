@@ -17,14 +17,19 @@ export class AppState {
   setLocation(location: RouterLocation) {
     if (location.route) {
       this.location = location.route.path;
+      this.currentView = {
+        component: location.route?.component!,
+        path: location.route?.path,
+        title: (location.route as RouteWithTitle).title,
+      };
     } else {
       if (location.pathname.startsWith(location.baseUrl)) {
         this.location = location.pathname.substr(location.baseUrl.length);
       } else {
         this.location = location.pathname;
       }
+      this.currentView = undefined;
     }
-    this.currentView = location.route as RouteWithTitle;
   }
 }
 export const appState = new AppState();
