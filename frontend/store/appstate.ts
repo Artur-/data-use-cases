@@ -8,7 +8,7 @@ export class AppState {
   // The location, relative to the base path, e.g. "hello" when viewing "/hello"
   location: string = '';
 
-  currentView?: RouteWithTitle;
+  currentView: RouteWithTitle = { component: '', path: '' };
 
   constructor() {
     makeAutoObservable(this);
@@ -28,7 +28,7 @@ export class AppState {
       } else {
         this.location = location.pathname;
       }
-      this.currentView = undefined;
+      this.currentView = { component: '', path: '' };
     }
   }
 }
