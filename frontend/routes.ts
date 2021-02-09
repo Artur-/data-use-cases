@@ -1,5 +1,4 @@
-import { Context, RouteWithComponent } from '@vaadin/router';
-import { setTitle } from '.';
+import { RouteWithComponent } from '@vaadin/router';
 
 export interface RouteWithTitle extends RouteWithComponent {
   title?: string;
@@ -9,13 +8,8 @@ export const routes: RouteWithTitle[] = [
   {
     path: '',
     component: 'main-view',
-    action: async (context: Context) => {
+    action: async () => {
       await import('./views/main/main-view');
-      const result = (await context.next()) as any;
-      if (result.route) {
-        const title = (result.route as RouteWithTitle).title;
-        setTitle(title);
-      }
     },
     children: [
       {
@@ -37,3 +31,7 @@ export const routes: RouteWithTitle[] = [
     ],
   },
 ];
+
+export const getViewRoutes = (): RouteWithTitle[] => {
+  return routes[0].children!;
+};
