@@ -8,7 +8,7 @@ export class AppState {
   // The location, relative to the base path, e.g. "hello" when viewing "/hello"
   location: string = '';
 
-  currentView: RouteWithTitle = { component: '', path: '' };
+  currentViewTitle?: string;
 
   constructor() {
     makeAutoObservable(this);
@@ -17,21 +17,14 @@ export class AppState {
   setLocation(location: RouterLocation) {
     if (location.route) {
       this.location = location.route.path;
-      this.currentView = {
-        component: location.route?.component!,
-        path: location.route?.path,
-        title: (location.route as RouteWithTitle).title,
-      };
     } else {
       if (location.pathname.startsWith(location.baseUrl)) {
         this.location = location.pathname.substr(location.baseUrl.length);
       } else {
         this.location = location.pathname;
       }
-      this.currentView = { component: '', path: '' };
     }
+    this.currentViewTitle = (location?.route as RouteWithTitle)?.title;
   }
 }
 export const appState = new AppState();
-
-(window as any).as = appState;

@@ -22,7 +22,7 @@ export class MainView extends Layout {
       <vaadin-app-layout primary-section="drawer">
         <header slot="navbar" theme="dark">
           <vaadin-drawer-toggle></vaadin-drawer-toggle>
-          <h1>${appState.currentView?.title}</h1>
+          <h1>${appState.currentViewTitle}</h1>
           <vaadin-avatar></vaadin-avatar>
         </header>
 
@@ -47,7 +47,7 @@ export class MainView extends Layout {
     `;
   }
   getSelectedViewRoute(): number {
-    return getViewRoutes().findIndex((viewRoute) => viewRoute == appState.currentView);
+    return getViewRoutes().findIndex((viewRoute) => viewRoute.path == appState.location);
   }
   connectedCallback() {
     super.connectedCallback();

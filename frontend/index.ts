@@ -7,7 +7,7 @@ router.setRoutes(routes);
 
 window.addEventListener('vaadin-router-location-changed', (e) => {
   appState.setLocation(e.detail.location);
-  const title = appState.currentView?.title;
+  const title = appState.currentViewTitle;
   if (title) {
     document.title = title + ' | ' + appState.applicationName;
   } else {
