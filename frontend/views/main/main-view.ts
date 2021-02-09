@@ -52,11 +52,11 @@ export class MainView extends Layout {
   connectedCallback() {
     super.connectedCallback();
 
-    this.autorun(() => {
-      // React whenever the current view changes
-      const title = appState.currentView ? appState.currentView.title : undefined;
-      document.title = title ? title + ' | ' + appState.applicationName : appState.applicationName;
-      AppLayoutElement.dispatchCloseOverlayDrawerEvent;
-    });
+    this.reaction(
+      () => appState.location,
+      () => {
+        AppLayoutElement.dispatchCloseOverlayDrawerEvent;
+      }
+    );
   }
 }
