@@ -7,6 +7,10 @@ router.setRoutes(routes);
 
 window.addEventListener('vaadin-router-location-changed', (e) => {
   appState.setLocation(e.detail.location);
-  const title = appState.currentView ? appState.currentView.title : undefined;
-  document.title = title ? title + ' | ' + appState.applicationName : appState.applicationName;
+  const title = appState.currentView?.title;
+  if (title) {
+    document.title = title + ' | ' + appState.applicationName;
+  } else {
+    document.title = appState.applicationName;
+  }
 });
