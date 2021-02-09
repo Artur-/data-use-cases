@@ -55,7 +55,7 @@ export class MainView extends Layout {
     this.reaction(
       () => appState.location,
       () => {
-        AppLayoutElement.dispatchCloseOverlayDrawerEvent;
+        AppLayoutElement.dispatchCloseOverlayDrawerEvent();
       }
     );
   }
