@@ -1,4 +1,3 @@
-import "!style-loader!css-loader!./gridwithaggregatedinfo-view.css";
 import "@polymer/iron-icon";
 import "@vaadin/vaadin-button";
 import "@vaadin/vaadin-date-picker";
@@ -14,11 +13,11 @@ import "@vaadin/vaadin-upload";
 import ProductNamePriceCategorySale from "Frontend/generated/com/vaadin/artur/datausecases/data/endpoint/ProductNamePriceCategorySale";
 import { customElement, html, internalProperty, query } from "lit-element";
 import * as ProductNamePriceCategorySaleEndpoint from "../../generated/ProductNamePriceCategorySaleEndpoint";
-import { View } from "../view";
+import { View } from "./view";
 import { endPointDataProvider } from "./griddataprovider";
 
-@customElement("gridwithaggregatedinfo-view")
-export class GridwithaggregatedinfoView extends View {
+@customElement("the-view")
+export class GridWithaAgregatedInfo extends View {
   @query("#grid")
   private grid!: GridElement;
 
