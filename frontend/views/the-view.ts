@@ -12,7 +12,7 @@ import "@vaadin/vaadin-text-field";
 import "@vaadin/vaadin-upload";
 import ProductNamePriceCategorySale from "Frontend/generated/com/vaadin/artur/datausecases/data/endpoint/ProductNamePriceCategorySale";
 import { customElement, html, internalProperty, query } from "lit-element";
-import * as ProductNamePriceCategorySaleEndpoint from "../../generated/ProductNamePriceCategorySaleEndpoint";
+import * as ProductNamePriceCategorySaleEndpoint from "Frontend/generated/ProductNamePriceCategorySaleEndpoint";
 import { View } from "./view";
 import { endPointDataProvider } from "./griddataprovider";
 
