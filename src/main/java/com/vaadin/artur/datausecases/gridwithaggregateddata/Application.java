@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases;
+package com.vaadin.artur.datausecases.gridwithaggregateddata;
 
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;

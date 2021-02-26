@@ -1,14 +1,14 @@
-package com.vaadin.artur.datausecases.data.generator;
+package com.vaadin.artur.datausecases.gridwithaggregateddata.data.generator;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
-import com.vaadin.artur.datausecases.data.entity.Product;
-import com.vaadin.artur.datausecases.data.entity.Sale;
-import com.vaadin.artur.datausecases.data.entity.SaleRow;
-import com.vaadin.artur.datausecases.data.service.ProductNamePriceCategoryRepository;
-import com.vaadin.artur.datausecases.data.service.SaleRepository;
+import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.Product;
+import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.Sale;
+import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.SaleRow;
+import com.vaadin.artur.datausecases.gridwithaggregateddata.data.service.ProductRepository;
+import com.vaadin.artur.datausecases.gridwithaggregateddata.data.service.SaleRepository;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 
 import org.slf4j.Logger;
@@ -24,7 +24,7 @@ public class DataGenerator {
         private static Random r = new Random(123);
 
         @Bean
-        public CommandLineRunner loadData(ProductNamePriceCategoryRepository productNamePriceCategoryRepository,
+        public CommandLineRunner loadData(ProductRepository productNamePriceCategoryRepository,
                         SaleRepository saleRepository) {
                 return args -> {
                         Logger logger = LoggerFactory.getLogger(getClass());
@@ -64,8 +64,10 @@ public class DataGenerator {
                                         Product p = oneOf(productNamePriceCategoryEntities);
                                         saleRow.setSale(sale);
                                         saleRow.setProduct(p);
+                                        saleRow.setCount(r.nextInt(20));
                                         saleRow.setSum(saleRow.getCount() * p.getPrice());
                                 });
+                                sale.setItems(saleRows);
                         }
                         saleRepository.saveAll(sales);
                         logger.info("Generated demo data");

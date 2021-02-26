@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases.data.endpoint;
+package com.vaadin.artur.datausecases.gridwithaggregateddata.data.endpoint;
 
 import javax.annotation.Nullable;
 

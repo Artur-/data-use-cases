@@ -1,11 +1,11 @@
-package com.vaadin.artur.datausecases.data.endpoint;
+package com.vaadin.artur.datausecases.gridwithaggregateddata.data.endpoint;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.vaadin.artur.datausecases.data.CountInterface;
-import com.vaadin.artur.datausecases.data.ReadInterface;
-import com.vaadin.artur.datausecases.data.service.ProductNamePriceCategoryRepository;
+import com.vaadin.artur.datausecases.gridwithaggregateddata.data.CountInterface;
+import com.vaadin.artur.datausecases.gridwithaggregateddata.data.ReadInterface;
+import com.vaadin.artur.datausecases.gridwithaggregateddata.data.service.ProductRepository;
 import com.vaadin.flow.server.connect.Endpoint;
 import com.vaadin.flow.server.connect.auth.AnonymousAllowed;
 
@@ -18,7 +18,7 @@ public class ProductSalesEndpoint
 		implements ReadInterface<ProductWithSales, Integer>, CountInterface<ProductWithSales, Integer> {
 
 	@Autowired
-	private ProductNamePriceCategoryRepository repo;
+	private ProductRepository repo;
 
 	public ProductSalesEndpoint() {
 	}

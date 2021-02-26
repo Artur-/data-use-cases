@@ -11,11 +11,11 @@ import "@vaadin/vaadin-ordered-layout/vaadin-horizontal-layout";
 import "@vaadin/vaadin-split-layout";
 import "@vaadin/vaadin-text-field";
 import "@vaadin/vaadin-upload";
-import ProductWithSales from "Frontend/generated/com/vaadin/artur/datausecases/data/endpoint/ProductWithSales";
+import ProductWithSales from "Frontend/generated/com/vaadin/artur/datausecases/gridwithaggregateddata/data/endpoint/ProductWithSales";
 import * as ProductSalesEndpoint from "Frontend/generated/ProductSalesEndpoint";
 import { customElement, html, internalProperty, query } from "lit-element";
-import { endPointDataProvider } from "./griddataprovider";
-import { View } from "./view";
+import { endPointDataProvider } from "./util/griddataprovider";
+import { View } from "./util/view";
 
 @customElement("the-view")
 export class GridWithaAgregatedInfo extends View {

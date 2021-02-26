@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases.data;
+package com.vaadin.artur.datausecases.gridwithaggregateddata.data;
 
 public interface WriteInterface<T, ID> {
 

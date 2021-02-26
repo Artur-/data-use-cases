@@ -3,10 +3,10 @@ import {
   GridDataProviderCallback,
   GridDataProviderParams,
 } from "@vaadin/vaadin-grid";
-import { ReadInterface } from "./ReadInterface";
+import { ListInterface } from "./list-interface";
 
-export const endPointDataProvider = <T, ID>(
-  endpoint: ReadInterface<T, ID>
+export const endPointDataProvider = <T>(
+  endpoint: ListInterface<T>
 ): GridDataProvider => {
   const dataProvider: GridDataProvider = async (
     params: GridDataProviderParams,

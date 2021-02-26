@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases.data;
+package com.vaadin.artur.datausecases.gridwithaggregateddata.data;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
