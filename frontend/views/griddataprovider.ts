@@ -3,13 +3,9 @@ import {
   GridDataProviderCallback,
   GridDataProviderParams,
 } from "@vaadin/vaadin-grid";
-import ProductNamePriceCategorySale from "Frontend/generated/com/vaadin/artur/datausecases/data/endpoint/ProductNamePriceCategorySale";
 import { ReadInterface } from "./ReadInterface";
 
-type T = ProductNamePriceCategorySale;
-type ID = number;
-
-export const endPointDataProvider = (
+export const endPointDataProvider = <T, ID>(
   endpoint: ReadInterface<T, ID>
 ): GridDataProvider => {
   const dataProvider: GridDataProvider = async (

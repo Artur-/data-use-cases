@@ -14,22 +14,22 @@ import org.vaadin.artur.helpers.GridSorter;
 
 @Endpoint
 @AnonymousAllowed
-public class ProductNamePriceCategorySaleEndpoint implements ReadInterface<ProductNamePriceCategorySale, Integer>,
-		CountInterface<ProductNamePriceCategorySale, Integer> {
+public class ProductSalesEndpoint
+		implements ReadInterface<ProductWithSales, Integer>, CountInterface<ProductWithSales, Integer> {
 
 	@Autowired
 	private ProductNamePriceCategoryRepository repo;
 
-	public ProductNamePriceCategorySaleEndpoint() {
+	public ProductSalesEndpoint() {
 	}
 
 	@Override
-	public List<ProductNamePriceCategorySale> list(int offset, int limit, List<GridSorter> sortOrder) {
+	public List<ProductWithSales> list(int offset, int limit, List<GridSorter> sortOrder) {
 		return repo.findAllWithSales();
 	}
 
 	@Override
-	public Optional<ProductNamePriceCategorySale> get(Integer id) {
+	public Optional<ProductWithSales> get(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

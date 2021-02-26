@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
-import com.vaadin.artur.datausecases.data.entity.ProductNamePriceCategory;
+import com.vaadin.artur.datausecases.data.entity.Product;
 import com.vaadin.artur.datausecases.data.entity.Sale;
 import com.vaadin.artur.datausecases.data.entity.SaleRow;
 import com.vaadin.artur.datausecases.data.service.ProductNamePriceCategoryRepository;
@@ -37,17 +37,14 @@ public class DataGenerator {
                         logger.info("Generating demo data");
 
                         logger.info("... generating 100 Product Name Price Category entities...");
-                        ExampleDataGenerator<ProductNamePriceCategory> productNamePriceCategoryRepositoryGenerator = new ExampleDataGenerator<>(
-                                        ProductNamePriceCategory.class, LocalDateTime.of(2021, 2, 24, 0, 0, 0));
-                        productNamePriceCategoryRepositoryGenerator.setData(ProductNamePriceCategory::setId,
-                                        DataType.ID);
-                        productNamePriceCategoryRepositoryGenerator.setData(ProductNamePriceCategory::setName,
+                        ExampleDataGenerator<Product> productNamePriceCategoryRepositoryGenerator = new ExampleDataGenerator<>(
+                                        Product.class, LocalDateTime.of(2021, 2, 24, 0, 0, 0));
+                        productNamePriceCategoryRepositoryGenerator.setData(Product::setId, DataType.ID);
+                        productNamePriceCategoryRepositoryGenerator.setData(Product::setName,
                                         DataType.FOOD_PRODUCT_NAME);
-                        productNamePriceCategoryRepositoryGenerator.setData(ProductNamePriceCategory::setPrice,
-                                        DataType.PRICE);
-                        productNamePriceCategoryRepositoryGenerator.setData(ProductNamePriceCategory::setCategory,
-                                        DataType.WORD);
-                        List<ProductNamePriceCategory> productNamePriceCategoryEntities = productNamePriceCategoryRepository
+                        productNamePriceCategoryRepositoryGenerator.setData(Product::setPrice, DataType.PRICE);
+                        productNamePriceCategoryRepositoryGenerator.setData(Product::setCategory, DataType.WORD);
+                        List<Product> productNamePriceCategoryEntities = productNamePriceCategoryRepository
                                         .saveAll(productNamePriceCategoryRepositoryGenerator.create(100, seed));
 
                         logger.info("... generating sales...");
@@ -64,7 +61,7 @@ public class DataGenerator {
                         for (Sale sale : sales) {
                                 List<SaleRow> saleRows = saleRowGenerator.create(10, sale.getId());
                                 saleRows.forEach(saleRow -> {
-                                        ProductNamePriceCategory p = oneOf(productNamePriceCategoryEntities);
+                                        Product p = oneOf(productNamePriceCategoryEntities);
                                         saleRow.setSale(sale);
                                         saleRow.setProduct(p);
                                         saleRow.setSum(saleRow.getCount() * p.getPrice());

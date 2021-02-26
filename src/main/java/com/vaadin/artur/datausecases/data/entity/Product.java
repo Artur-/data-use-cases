@@ -10,7 +10,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class ProductNamePriceCategory extends AbstractEntity {
+public class Product extends AbstractEntity {
 
     private String name;
     private double price;

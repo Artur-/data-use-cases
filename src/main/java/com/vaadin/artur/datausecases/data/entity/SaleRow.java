@@ -16,7 +16,7 @@ public class SaleRow extends AbstractEntity {
     @ManyToOne
     private Sale sale;
     @ManyToOne
-    private ProductNamePriceCategory product;
+    private Product product;
     private int count;
     private double sum;
 
