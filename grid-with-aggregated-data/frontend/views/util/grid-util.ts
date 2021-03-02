@@ -2,6 +2,7 @@ import {
   GridDataProvider,
   GridDataProviderCallback,
   GridDataProviderParams,
+  GridElement,
   GridSorterDirection,
 } from "@vaadin/vaadin-grid";
 import { ListInterface } from "./list-interface";
@@ -52,4 +53,10 @@ export const endPointDataProvider = <T>(
     callback(data, size);
   };
   return dataProvider;
+};
+
+export const syncGridSelection = (event: CustomEvent) => {
+  const item: any = event.detail.value;
+  const grid = event.target as GridElement;
+  grid.selectedItems = item ? [item] : [];
 };

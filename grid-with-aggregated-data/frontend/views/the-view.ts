@@ -4,7 +4,6 @@ import "@vaadin/vaadin-button";
 import "@vaadin/vaadin-date-picker";
 import "@vaadin/vaadin-form-layout";
 import "@vaadin/vaadin-grid";
-import { GridElement } from "@vaadin/vaadin-grid/vaadin-grid";
 import "@vaadin/vaadin-grid/vaadin-grid-sort-column";
 import "@vaadin/vaadin-icons";
 import "@vaadin/vaadin-ordered-layout/vaadin-horizontal-layout";
@@ -13,15 +12,12 @@ import "@vaadin/vaadin-text-field";
 import "@vaadin/vaadin-upload";
 import ProductWithSales from "Frontend/generated/com/vaadin/artur/datausecases/gridwithaggregateddata/data/endpoint/ProductWithSales";
 import * as ProductSalesEndpoint from "Frontend/generated/ProductSalesEndpoint";
-import { customElement, html, query } from "lit-element";
-import { endPointDataProvider } from "./util/griddataprovider";
+import { customElement, html } from "lit-element";
+import { endPointDataProvider, syncGridSelection } from "./util/grid-util";
 import { View } from "./util/view";
 
 @customElement("the-view")
 export class GridWithaAgregatedInfo extends View {
-  @query("#grid")
-  private grid!: GridElement;
-
   render() {
     return html`
       <vaadin-split-layout class="full-size">
@@ -52,11 +48,9 @@ export class GridWithaAgregatedInfo extends View {
       </vaadin-split-layout>
     `;
   }
-
   private async itemSelected(event: CustomEvent) {
+    syncGridSelection(event);
     const item: ProductWithSales = event.detail.value as ProductWithSales;
-    this.grid.selectedItems = item ? [item] : [];
-
     if (item) {
       showNotification(
         `If there was a form, now I would fetch more data from the backend`
