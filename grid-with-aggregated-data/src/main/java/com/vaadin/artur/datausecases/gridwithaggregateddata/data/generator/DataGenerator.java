@@ -21,6 +21,7 @@ import org.vaadin.artur.exampledata.ExampleDataGenerator;
 @SpringComponent
 public class DataGenerator {
 
+        private static final LocalDateTime REFERENCE_TIME = LocalDateTime.of(2021, 2, 24, 0, 0, 0);
         private static Random r = new Random(123);
 
         @Bean
@@ -36,24 +37,24 @@ public class DataGenerator {
 
                         logger.info("Generating demo data");
 
-                        logger.info("... generating 100 Product entities...");
+                        logger.info("... generating 1000 Product entities...");
                         ExampleDataGenerator<Product> productGenerator = new ExampleDataGenerator<>(Product.class,
-                                        LocalDateTime.of(2021, 2, 24, 0, 0, 0));
+                                        REFERENCE_TIME);
                         productGenerator.setData(Product::setId, DataType.ID);
                         productGenerator.setData(Product::setName, DataType.FOOD_PRODUCT_NAME);
                         productGenerator.setData(Product::setPrice, DataType.PRICE);
                         productGenerator.setData(Product::setCategory, DataType.WORD);
                         List<Product> productNamePriceCategoryEntities = productNamePriceCategoryRepository
-                                        .saveAll(productGenerator.create(100, seed));
+                                        .saveAll(productGenerator.create(1000, seed));
 
                         logger.info("... generating sales...");
 
                         ExampleDataGenerator<Sale> saleGenerator = new ExampleDataGenerator<>(Sale.class,
-                                        LocalDateTime.of(2021, 2, 24, 0, 0, 0));
+                                        REFERENCE_TIME);
                         saleGenerator.setData(Sale::setId, DataType.ID);
-                        List<Sale> sales = saleGenerator.create(100, 1);
+                        List<Sale> sales = saleGenerator.create(1000, 1);
                         ExampleDataGenerator<SaleRow> saleRowGenerator = new ExampleDataGenerator<>(SaleRow.class,
-                                        LocalDateTime.of(2021, 2, 24, 0, 0, 0));
+                                        REFERENCE_TIME);
                         saleRowGenerator.setData(SaleRow::setId, DataType.ID);
                         saleRowGenerator.setData(SaleRow::setSum, DataType.PRICE);
 
