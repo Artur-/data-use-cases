@@ -10,6 +10,16 @@ import Sort from "Frontend/generated/org/springframework/data/domain/Sort";
 import Direction from "Frontend/generated/org/springframework/data/domain/Sort/Direction";
 import NullHandling from "Frontend/generated/org/springframework/data/domain/Sort/NullHandling";
 import FakePageable from "Frontend/generated/com/vaadin/artur/datausecases/util/FakePageable";
+import { html } from "lit";
+import {
+  ChildPartInfo,
+  directive,
+  Directive,
+  PartInfo,
+  PartType,
+} from "lit/directive";
+import { ModelConstructor } from "Frontend/../target/flow-frontend/form";
+import "@vaadin/vaadin-grid/vaadin-grid-sort-column";
 
 const toFakePageable = (params: GridDataProviderParams): FakePageable => {
   const sort: Sort = {
@@ -60,3 +70,28 @@ export const syncGridSelection = (event: CustomEvent) => {
   const grid = event.target as GridElement;
   grid.selectedItems = item ? [item] : [];
 };
+
+export const gridColumns = directive(
+  class extends Directive {
+    partInfo: ChildPartInfo;
+    constructor(partInfo: PartInfo) {
+      super(partInfo);
+      if (partInfo.type !== PartType.CHILD) {
+        throw new Error(
+          "Use as <vaadin-grid>${gridColumns(...)}</vaadin-grid>"
+        );
+      }
+      this.partInfo = partInfo;
+    }
+    render(Model: ModelConstructor<any, any>) {
+      const properties = Object.keys(
+        Object.getOwnPropertyDescriptors(Model.prototype)
+      ).filter((p) => p !== "constructor");
+
+      return properties.map(
+        (p) =>
+          html`<vaadin-grid-sort-column path="${p}"></vaadin-grid-sort-column>`
+      );
+    }
+  }
+);
