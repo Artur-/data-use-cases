@@ -4,27 +4,21 @@ import javax.annotation.Nullable;
 
 import org.springframework.stereotype.Component;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Component
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductWithSales {
     public String name;
     public double price;
     public String category;
     @Nullable
     public Double salesLastMonth;
-
-    public ProductWithSales() {
-    }
-
-    public ProductWithSales(String name, double price, String category, Double salesLastMonth) {
-        this.name = name;
-        this.price = price;
-        this.category = category;
-        this.salesLastMonth = salesLastMonth;
-    }
 
 }

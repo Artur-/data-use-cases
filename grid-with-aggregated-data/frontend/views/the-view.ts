@@ -4,7 +4,7 @@ import "@vaadin/vaadin-button";
 import "@vaadin/vaadin-date-picker";
 import "@vaadin/vaadin-form-layout";
 import "@vaadin/vaadin-grid";
-import { GridDataProvider, GridElement } from "@vaadin/vaadin-grid/vaadin-grid";
+import { GridElement } from "@vaadin/vaadin-grid/vaadin-grid";
 import "@vaadin/vaadin-grid/vaadin-grid-sort-column";
 import "@vaadin/vaadin-icons";
 import "@vaadin/vaadin-ordered-layout/vaadin-horizontal-layout";
@@ -13,7 +13,7 @@ import "@vaadin/vaadin-text-field";
 import "@vaadin/vaadin-upload";
 import ProductWithSales from "Frontend/generated/com/vaadin/artur/datausecases/gridwithaggregateddata/data/endpoint/ProductWithSales";
 import * as ProductSalesEndpoint from "Frontend/generated/ProductSalesEndpoint";
-import { customElement, html, internalProperty, query } from "lit-element";
+import { customElement, html, query } from "lit-element";
 import { endPointDataProvider } from "./util/griddataprovider";
 import { View } from "./util/view";
 
@@ -22,22 +22,13 @@ export class GridWithaAgregatedInfo extends View {
   @query("#grid")
   private grid!: GridElement;
 
-  @internalProperty()
-  private gridSize = 0;
-
-  @internalProperty()
-  private dataProvider: GridDataProvider = endPointDataProvider(
-    ProductSalesEndpoint
-  );
-
   render() {
     return html`
       <vaadin-split-layout class="full-size">
         <div class="grid-wrapper">
           <vaadin-grid
             id="grid"
-            .size="${this.gridSize}"
-            .dataProvider="${this.dataProvider}"
+            .dataProvider="${endPointDataProvider(ProductSalesEndpoint)}"
             @active-item-changed=${this.itemSelected}
           >
             <vaadin-grid-sort-column
@@ -60,11 +51,6 @@ export class GridWithaAgregatedInfo extends View {
         </div>
       </vaadin-split-layout>
     `;
-  }
-
-  async connectedCallback() {
-    super.connectedCallback();
-    this.gridSize = await ProductSalesEndpoint.count();
   }
 
   private async itemSelected(event: CustomEvent) {

@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata.data;
+package com.vaadin.artur.datausecases.util;
 
 public interface CountInterface<T, ID> {
 

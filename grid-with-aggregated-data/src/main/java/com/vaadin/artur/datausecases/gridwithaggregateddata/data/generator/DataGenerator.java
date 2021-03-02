@@ -36,16 +36,15 @@ public class DataGenerator {
 
                         logger.info("Generating demo data");
 
-                        logger.info("... generating 100 Product Name Price Category entities...");
-                        ExampleDataGenerator<Product> productNamePriceCategoryRepositoryGenerator = new ExampleDataGenerator<>(
-                                        Product.class, LocalDateTime.of(2021, 2, 24, 0, 0, 0));
-                        productNamePriceCategoryRepositoryGenerator.setData(Product::setId, DataType.ID);
-                        productNamePriceCategoryRepositoryGenerator.setData(Product::setName,
-                                        DataType.FOOD_PRODUCT_NAME);
-                        productNamePriceCategoryRepositoryGenerator.setData(Product::setPrice, DataType.PRICE);
-                        productNamePriceCategoryRepositoryGenerator.setData(Product::setCategory, DataType.WORD);
+                        logger.info("... generating 100 Product entities...");
+                        ExampleDataGenerator<Product> productGenerator = new ExampleDataGenerator<>(Product.class,
+                                        LocalDateTime.of(2021, 2, 24, 0, 0, 0));
+                        productGenerator.setData(Product::setId, DataType.ID);
+                        productGenerator.setData(Product::setName, DataType.FOOD_PRODUCT_NAME);
+                        productGenerator.setData(Product::setPrice, DataType.PRICE);
+                        productGenerator.setData(Product::setCategory, DataType.WORD);
                         List<Product> productNamePriceCategoryEntities = productNamePriceCategoryRepository
-                                        .saveAll(productNamePriceCategoryRepositoryGenerator.create(100, seed));
+                                        .saveAll(productGenerator.create(100, seed));
 
                         logger.info("... generating sales...");
 

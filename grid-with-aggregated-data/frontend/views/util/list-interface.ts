@@ -1,9 +1,5 @@
-import GridSorter from "Frontend/generated/org/vaadin/artur/helpers/GridSorter";
+import FakePageable from "Frontend/generated/com/vaadin/artur/datausecases/util/FakePageable";
 
 export interface ListInterface<T> {
-  list(
-    offset: number,
-    limit: number,
-    sortOrder: Array<GridSorter>
-  ): Promise<Array<T>>;
+  list(pageable: FakePageable): Promise<Array<T>>;
 }
