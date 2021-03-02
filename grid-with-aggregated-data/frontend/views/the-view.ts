@@ -13,8 +13,11 @@ import "@vaadin/vaadin-upload";
 import ProductWithSales from "Frontend/generated/com/vaadin/artur/datausecases/gridwithaggregateddata/data/endpoint/ProductWithSales";
 import * as ProductSalesEndpoint from "Frontend/generated/ProductSalesEndpoint";
 import { customElement, html } from "lit-element";
-import { endPointDataProvider, syncGridSelection } from "./util/grid-util";
-import { View } from "./util/view";
+import {
+  endPointDataProvider,
+  syncGridSelection,
+} from "@vaadin/flow-frontend/util/grid-util";
+import { View } from "@vaadin/flow-frontend/util/view";
 
 @customElement("the-view")
 export class GridWithaAgregatedInfo extends View {

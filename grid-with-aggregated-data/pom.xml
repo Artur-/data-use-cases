@@ -10,4 +10,12 @@
 
     <artifactId>grid-with-aggregated-data</artifactId>
     <name>Grid with aggregated data</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin.artur.datausecases</groupId>
+            <artifactId>util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
