@@ -11,17 +11,63 @@
         height: 100vh;
       }
 
-      h1.header {
+      .header {
         margin: 0;
         padding: 1em;
         background: lightgrey;
         font-family: var(--lumo-font-family);
+      }
+      .horiz {
+        display: flex;
+        flex-direction: row;
+      }
+      pre {
+        padding-right: 3em;
       }
     </style>
     <!-- index.ts is included here automatically (either by the dev server or during the build) -->
   </head>
 
   <body>
+    <github-corner>
+      <a
+        href="https://github.com/Artur-/data-use-cases/blob/master/grid-with-aggregated-data"
+      ></a>
+    </github-corner>
+    <div class="header">
+      <h2>
+        Use case: Show custom data in a read only grid in an efficient way that
+        supports sorting and lazy loading
+      </h2>
+      <p>Data model:</p>
+      <div class="horiz">
+        <pre>
+public class Product extends AbstractEntity {
+  private String name;
+  private double price;
+  private String category;
+}</pre
+        >
+        <pre>
+public class SaleRow extends AbstractEntity {
+  @ManyToOne
+  private Sale sale;
+  @ManyToOne
+  private Product product;
+  private int count;
+  private double sum;
+}</pre
+        >
+        <pre>
+public class Sale extends AbstractEntity {
+  @OneToMany(cascade = CascadeType.ALL)
+  private List&lt;SaleRow> items;
+  private LocalDate date;
+}
+          </pre
+        >
+      </div>
+    </div>
     <the-view></the-view>
   </body>
 </html>

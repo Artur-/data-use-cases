@@ -1,1 +1,2 @@
-import "./views/the-view";
+import "github-corner";
+import "./the-view";

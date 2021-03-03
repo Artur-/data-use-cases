@@ -1,4 +1,9 @@
 import "@polymer/iron-icon";
+import {
+  endpointData,
+  gridColumns,
+} from "@vaadin/flow-frontend/util/grid-util";
+import { View } from "@vaadin/flow-frontend/util/view";
 import "@vaadin/vaadin-button";
 import "@vaadin/vaadin-date-picker";
 import "@vaadin/vaadin-form-layout";
@@ -13,31 +18,12 @@ import ProductWithSalesModel from "Frontend/generated/com/vaadin/artur/datauseca
 import * as ProductSalesEndpoint from "Frontend/generated/ProductSalesEndpoint";
 import { html } from "lit";
 import { customElement } from "lit/decorators";
-import {
-  endPointDataProvider,
-  gridColumns,
-} from "@vaadin/flow-frontend/util/grid-util";
-import { View } from "@vaadin/flow-frontend/util/view";
 
 @customElement("the-view")
 export class GridWithaAgregatedInfo extends View {
-  description() {
-    return html`<h1 class="header">
-      Use case: Show custom data in a read only grid in an efficient way that
-      supports lazy loading
-    </h1>`;
-  }
   render() {
-    return html`${this.description()}
-      <vaadin-split-layout class="full-size">
-        <div class="grid-wrapper">
-          <vaadin-grid
-            id="grid"
-            .dataProvider="${endPointDataProvider(ProductSalesEndpoint)}"
-          >
-            ${gridColumns(ProductWithSalesModel)}
-          </vaadin-grid>
-        </div>
-      </vaadin-split-layout> `;
+    return html` <vaadin-grid ${endpointData(ProductSalesEndpoint)}>
+      ${gridColumns(ProductWithSalesModel)}
+    </vaadin-grid>`;
   }
 }
