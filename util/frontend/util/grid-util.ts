@@ -15,6 +15,7 @@ import {
   ChildPartInfo,
   directive,
   Directive,
+  ElementPartInfo,
   PartInfo,
   PartType,
 } from "lit/directive";
@@ -71,6 +72,24 @@ export const syncGridSelection = (event: CustomEvent) => {
   grid.selectedItems = item ? [item] : [];
 };
 
+export const endpointData = directive(
+  class extends Directive {
+    partInfo: ElementPartInfo;
+    constructor(partInfo: PartInfo) {
+      super(partInfo);
+      if (partInfo.type !== PartType.ELEMENT) {
+        throw new Error(
+          "Use as <vaadin-grid ${endpointData(...)}></vaadin-grid>"
+        );
+      }
+      this.partInfo = partInfo;
+    }
+    render<T>(endpoint: ListInterface<T>) {
+      const grid = (this.partInfo as any).element as GridElement;
+      grid.dataProvider = endPointDataProvider(endpoint);
+    }
+  }
+);
 export const gridColumns = directive(
   class extends Directive {
     partInfo: ChildPartInfo;
