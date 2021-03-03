@@ -7,9 +7,9 @@
         <artifactId>parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
     <artifactId>grid-with-aggregated-data</artifactId>
     <name>Grid with aggregated data</name>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
