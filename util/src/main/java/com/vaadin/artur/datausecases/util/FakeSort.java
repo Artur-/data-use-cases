@@ -1,6 +1,7 @@
 package com.vaadin.artur.datausecases.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,16 @@ public class FakeSort extends Sort {
     protected FakeSort(List<FakeOrder> orders) {
         this();
         this.orders = orders;
+    }
+
+    @Override
+    public boolean isSorted() {
+        return !orders.isEmpty();
+    }
+
+    @Override
+    public Iterator iterator() {
+        return this.orders.iterator();
     }
 
 }

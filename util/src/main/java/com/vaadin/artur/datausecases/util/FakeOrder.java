@@ -11,8 +11,8 @@ public class FakeOrder extends Order {
     private boolean ignoreCase;
     private NullHandling nullHandling;
 
-    public FakeOrder(Direction direction, String property) {
-        super(direction, property);
+    public FakeOrder() {
+        super(Direction.DESC, "foo");
     }
 
     @Override
