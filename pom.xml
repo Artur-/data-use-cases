@@ -170,11 +170,17 @@
         <profile>
             <id>everything-but-util</id>
             <activation>
-                <property>
-                    <name>util.module</name>
-                    <value>false</value>
-                </property>
+                <file>
+                    <missing>no-util-module-please</missing>
+                </file>
             </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.vaadin.artur.datausecases</groupId>
+                    <artifactId>util</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
                     <plugin>
