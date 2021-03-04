@@ -63,6 +63,7 @@ export const endPointDataProvider = <T>(
 
     callback(data, size);
   };
+  (dataProvider as any).endpoint = endpoint;
   return dataProvider;
 };
 
@@ -86,6 +87,12 @@ export const endpointData = directive(
     }
     render<T>(endpoint: ListInterface<T>) {
       const grid = (this.partInfo as any).element as GridElement;
+      if (grid.dataProvider) {
+        const currentEndpoint = (grid.dataProvider as any).endpoint;
+        if (currentEndpoint === endpoint) {
+          return;
+        }
+      }
       grid.dataProvider = endPointDataProvider(endpoint);
     }
   }
