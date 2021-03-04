@@ -25,11 +25,10 @@ public class DataGenerator {
         private static Random r = new Random(123);
 
         @Bean
-        public CommandLineRunner loadData(ProductRepository productNamePriceCategoryRepository,
-                        SaleRepository saleRepository) {
+        public CommandLineRunner loadData(ProductRepository productRepository, SaleRepository saleRepository) {
                 return args -> {
                         Logger logger = LoggerFactory.getLogger(getClass());
-                        if (productNamePriceCategoryRepository.count() != 0L) {
+                        if (productRepository.count() != 0L) {
                                 logger.info("Using existing database");
                                 return;
                         }
@@ -44,7 +43,7 @@ public class DataGenerator {
                         productGenerator.setData(Product::setName, DataType.FOOD_PRODUCT_NAME);
                         productGenerator.setData(Product::setPrice, DataType.PRICE);
                         productGenerator.setData(Product::setCategory, DataType.WORD);
-                        List<Product> productNamePriceCategoryEntities = productNamePriceCategoryRepository
+                        List<Product> productNamePriceCategoryEntities = productRepository
                                         .saveAll(productGenerator.create(1000, seed));
 
                         logger.info("... generating sales...");
@@ -52,14 +51,14 @@ public class DataGenerator {
                         ExampleDataGenerator<Sale> saleGenerator = new ExampleDataGenerator<>(Sale.class,
                                         REFERENCE_TIME);
                         saleGenerator.setData(Sale::setId, DataType.ID);
-                        List<Sale> sales = saleGenerator.create(1000, 1);
+                        List<Sale> sales = saleGenerator.create(500, 1);
                         ExampleDataGenerator<SaleRow> saleRowGenerator = new ExampleDataGenerator<>(SaleRow.class,
                                         REFERENCE_TIME);
                         saleRowGenerator.setData(SaleRow::setId, DataType.ID);
                         saleRowGenerator.setData(SaleRow::setSum, DataType.PRICE);
 
                         for (Sale sale : sales) {
-                                List<SaleRow> saleRows = saleRowGenerator.create(10, sale.getId());
+                                List<SaleRow> saleRows = saleRowGenerator.create(5, sale.getId());
                                 saleRows.forEach(saleRow -> {
                                         Product p = oneOf(productNamePriceCategoryEntities);
                                         saleRow.setSale(sale);
