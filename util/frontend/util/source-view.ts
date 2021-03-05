@@ -1,4 +1,4 @@
-import { View } from '@vaadin/flow-frontend/util/view';
+import { View } from './view';
 import { html, PropertyValues } from 'lit-element';
 import { customElement, property, state } from 'lit/decorators';
 

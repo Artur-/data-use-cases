@@ -1,3 +1,3 @@
 import 'github-corner';
-import 'source-view';
+import '@vaadin/flow-frontend/util/source-view';
 import './the-view';
