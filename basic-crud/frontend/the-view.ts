@@ -13,8 +13,8 @@ import '@vaadin/vaadin-text-field';
 import { ProductEndpoint } from 'Frontend/generated/ProductEndpoint';
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators';
-import Product from './generated/com/vaadin/artur/datausecases/gridwithaggregateddata/data/entity/Product';
-import ProductModel from './generated/com/vaadin/artur/datausecases/gridwithaggregateddata/data/entity/ProductModel';
+import Product from './generated/com/vaadin/artur/datausecases/basiccrud/data/entity/Product';
+import ProductModel from './generated/com/vaadin/artur/datausecases/basiccrud/data/entity/ProductModel';
 
 @customElement('the-view')
 export class FormEntityWithRelations extends View {

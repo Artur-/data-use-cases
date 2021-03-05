@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity;
+package com.vaadin.artur.datausecases.basiccrud.data.entity;
 
 import java.math.BigDecimal;
 
@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.AbstractEntity;
+import com.vaadin.artur.datausecases.basiccrud.data.AbstractEntity;
 
 import lombok.Getter;
 import lombok.Setter;

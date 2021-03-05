@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata.data.generator;
+package com.vaadin.artur.datausecases.basiccrud.data.generator;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.Product;
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.service.ProductRepository;
+import com.vaadin.artur.datausecases.basiccrud.data.entity.Product;
+import com.vaadin.artur.datausecases.basiccrud.data.service.ProductRepository;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 
 import org.slf4j.Logger;

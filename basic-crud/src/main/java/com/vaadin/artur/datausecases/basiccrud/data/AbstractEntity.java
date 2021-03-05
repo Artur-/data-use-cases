@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata.data;
+package com.vaadin.artur.datausecases.basiccrud.data;
 
 import java.util.UUID;
 

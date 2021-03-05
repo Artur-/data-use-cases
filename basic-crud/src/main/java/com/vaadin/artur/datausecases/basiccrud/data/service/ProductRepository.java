@@ -1,8 +1,8 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata.data.service;
+package com.vaadin.artur.datausecases.basiccrud.data.service;
 
 import java.util.UUID;
 
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.Product;
+import com.vaadin.artur.datausecases.basiccrud.data.entity.Product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

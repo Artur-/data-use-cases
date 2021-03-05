@@ -1,11 +1,11 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata.data.endpoint;
+package com.vaadin.artur.datausecases.basiccrud.data.endpoint;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.Product;
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.service.ProductRepository;
+import com.vaadin.artur.datausecases.basiccrud.data.entity.Product;
+import com.vaadin.artur.datausecases.basiccrud.data.service.ProductRepository;
 import com.vaadin.artur.datausecases.util.FakePageable;
 import com.vaadin.artur.datausecases.util.GetInterface;
 import com.vaadin.artur.datausecases.util.ListInterface;
