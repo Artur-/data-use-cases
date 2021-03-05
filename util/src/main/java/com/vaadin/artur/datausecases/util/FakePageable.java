@@ -1,7 +1,6 @@
 package com.vaadin.artur.datausecases.util;
 
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 import lombok.Getter;
 import lombok.Setter;

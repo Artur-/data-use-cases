@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata;
+package com.vaadin.artur.datausecases.util;
 
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;

@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata;
+package com.vaadin.artur.datausecases.util;
 
 import com.zaxxer.hikari.*;
 import org.springframework.beans.factory.annotation.Value;

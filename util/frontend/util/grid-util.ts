@@ -1,30 +1,22 @@
+import { ModelConstructor } from '@vaadin/flow-frontend/form';
 import {
   GridDataProvider,
   GridDataProviderCallback,
   GridDataProviderParams,
   GridElement,
   GridSorterDirection,
-} from "@vaadin/vaadin-grid";
-import { ListInterface } from "./crud-interface";
-import Sort from "Frontend/generated/org/springframework/data/domain/Sort";
-import Direction from "Frontend/generated/org/springframework/data/domain/Sort/Direction";
-import NullHandling from "Frontend/generated/org/springframework/data/domain/Sort/NullHandling";
-import FakePageable from "Frontend/generated/com/vaadin/artur/datausecases/util/FakePageable";
-import { html } from "lit";
-import {
-  ChildPartInfo,
-  directive,
-  Directive,
-  ElementPartInfo,
-  PartInfo,
-  PartType,
-} from "lit/directive";
-import { ModelConstructor } from "Frontend/../target/flow-frontend/form";
-import "@vaadin/vaadin-grid/vaadin-grid-sort-column";
+} from '@vaadin/vaadin-grid';
+import '@vaadin/vaadin-grid/vaadin-grid-sort-column';
+import FakePageable from 'Frontend/generated/com/vaadin/artur/datausecases/util/FakePageable';
+import Sort from 'Frontend/generated/org/springframework/data/domain/Sort';
+import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
+import NullHandling from 'Frontend/generated/org/springframework/data/domain/Sort/NullHandling';
+import { html } from 'lit';
+import { ChildPartInfo, directive, Directive, ElementPartInfo, PartInfo, PartType } from 'lit/directive';
+import { ListInterface } from './crud-interface';
+import { EndpointLazyList } from './lazy-list';
 
-export const toFakePageable = (
-  params: GridDataProviderParams
-): FakePageable => {
+export const toFakePageable = (params: GridDataProviderParams): FakePageable => {
   const sort: Sort = {
     orders: params.sortOrders.map((sortOrder) => ({
       direction: toDirection(sortOrder.direction),
@@ -40,15 +32,13 @@ export const toFakePageable = (
   };
 };
 const toDirection = (direction: GridSorterDirection): Direction => {
-  if (direction == null || direction == "asc") {
+  if (direction == null || direction == 'asc') {
     return Direction.ASC;
   }
   return Direction.DESC;
 };
 
-export const endPointDataProvider = <T>(
-  endpoint: ListInterface<T>
-): GridDataProvider => {
+export const endPointDataProvider = <T>(endpoint: ListInterface<T>): GridDataProvider => {
   const dataProvider: GridDataProvider = async (
     params: GridDataProviderParams,
     callback: GridDataProviderCallback
@@ -81,9 +71,7 @@ export const endpointData = directive(
     constructor(partInfo: PartInfo) {
       super(partInfo);
       if (partInfo.type !== PartType.ELEMENT) {
-        throw new Error(
-          "Use as <vaadin-grid ${endpointData(...)}></vaadin-grid>"
-        );
+        throw new Error('Use as <vaadin-grid ${endpointData(...)}></vaadin-grid>');
       }
       this.partInfo = partInfo;
     }
@@ -105,21 +93,99 @@ export const gridColumns = directive(
     constructor(partInfo: PartInfo) {
       super(partInfo);
       if (partInfo.type !== PartType.CHILD) {
-        throw new Error(
-          "Use as <vaadin-grid>${gridColumns(...)}</vaadin-grid>"
-        );
+        throw new Error('Use as <vaadin-grid>${gridColumns(...)}</vaadin-grid>');
       }
       this.partInfo = partInfo;
     }
     render(Model: ModelConstructor<any, any>) {
-      const properties = Object.keys(
-        Object.getOwnPropertyDescriptors(Model.prototype)
-      ).filter((p) => p !== "constructor");
-
-      return properties.map(
-        (p) =>
-          html`<vaadin-grid-sort-column path="${p}"></vaadin-grid-sort-column>`
+      const properties = Object.keys(Object.getOwnPropertyDescriptors(Model.prototype)).filter(
+        (p) => p !== 'constructor'
       );
+
+      return properties.map((p) => html`<vaadin-grid-sort-column path="${p}"></vaadin-grid-sort-column>`);
+    }
+  }
+);
+
+// export const singleSelect = directive(
+//   class extends Directive {
+//     partInfo: ElementPartInfo;
+//     attached: boolean = false;
+//     grid!: GridElement;
+//     selectionListener!: (selection: any) => void;
+
+//     listener = (e: GridActiveItemChanged) => {
+//       const item = e.detail.value;
+//       this.grid.selectedItems = item ? [item] : [];
+//       this.selectionListener(this.grid.selectedItems);
+//     };
+
+//     constructor(partInfo: PartInfo) {
+//       super(partInfo);
+//       if (partInfo.type !== PartType.ELEMENT) {
+//         throw new Error("Use as <vaadin-grid ${singleSelect()}></vaadin-grid>");
+//       }
+//       this.partInfo = partInfo;
+//     }
+//     render<T>(selectionListener: (selection: T) => void) {
+//       this.grid = (this.partInfo as any).element as GridElement;
+//       if (!this.attached) {
+//         this.attached = true;
+//         this.selectionListener = selectionListener;
+//         this.grid.addEventListener("active-item-changed", this.listener);
+//       }
+//     }
+//   }
+// );
+
+const lazyListDataProvider = <T>(grid: GridElement, lazyList: EndpointLazyList<T>): GridDataProvider => {
+  const dataProvider: GridDataProvider = async (
+    params: GridDataProviderParams,
+    callback: GridDataProviderCallback
+  ): Promise<void> => {
+    const data = await lazyList.list(toFakePageable(params));
+    let size;
+
+    const firstIndex = params.page * params.pageSize;
+    if (data.length == params.pageSize) {
+      size = firstIndex + data.length + 1;
+    } else {
+      size = firstIndex + data.length;
+    }
+
+    callback(data, size);
+  };
+  lazyList.addListener({
+    refresh: (_dataObject) => {
+      grid.clearCache();
+    },
+    refreshAll: () => {
+      grid.clearCache();
+    },
+  });
+  (dataProvider as any).lazyList = lazyList;
+  return dataProvider;
+};
+
+export const gridData = directive(
+  class extends Directive {
+    partInfo: ElementPartInfo;
+    constructor(partInfo: PartInfo) {
+      super(partInfo);
+      if (partInfo.type !== PartType.ELEMENT) {
+        throw new Error('Use as <vaadin-grid ${endpointData(...)}></vaadin-grid>');
+      }
+      this.partInfo = partInfo;
+    }
+    render<T>(lazyList: EndpointLazyList<T>) {
+      const grid = (this.partInfo as any).element as GridElement;
+      if (grid.dataProvider) {
+        const currentList = (grid.dataProvider as any).lazyList;
+        if (currentList === lazyList) {
+          return;
+        }
+      }
+      grid.dataProvider = lazyListDataProvider(grid, lazyList);
     }
   }
 );
