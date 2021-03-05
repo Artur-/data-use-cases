@@ -50,4 +50,13 @@ public class FakeOrder extends Order {
     public void setNullHandling(NullHandling nullHandling) {
         this.nullHandling = nullHandling;
     }
+
+    public boolean isAscending() {
+        return this.direction.isAscending();
+    }
+
+    public boolean isDescending() {
+        return this.direction.isDescending();
+    }
+
 }
