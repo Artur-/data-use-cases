@@ -5,7 +5,7 @@ import {
   GridElement,
   GridSorterDirection,
 } from "@vaadin/vaadin-grid";
-import { ListInterface } from "./list-interface";
+import { ListInterface } from "./crud-interface";
 import Sort from "Frontend/generated/org/springframework/data/domain/Sort";
 import Direction from "Frontend/generated/org/springframework/data/domain/Sort/Direction";
 import NullHandling from "Frontend/generated/org/springframework/data/domain/Sort/NullHandling";
@@ -22,7 +22,9 @@ import {
 import { ModelConstructor } from "Frontend/../target/flow-frontend/form";
 import "@vaadin/vaadin-grid/vaadin-grid-sort-column";
 
-const toFakePageable = (params: GridDataProviderParams): FakePageable => {
+export const toFakePageable = (
+  params: GridDataProviderParams
+): FakePageable => {
   const sort: Sort = {
     orders: params.sortOrders.map((sortOrder) => ({
       direction: toDirection(sortOrder.direction),
