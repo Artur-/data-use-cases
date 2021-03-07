@@ -81,7 +81,7 @@
       "webpack-merge": "4.2.2",
       "extract-loader": "5.1.0"
     },
-    "hash": "bd54629ce65f49a894d2b904b3ca34bc773763825ee17a7ddd06d06eb7626089"
+    "hash": "588645804f2c739b77027c8163e85727347cee478769ad6cad7afaf58e145c86"
   },
   "dependencies": {
     "@adobe/lit-mobx": "^1.0.1",
@@ -139,11 +139,13 @@
     "lit-element": "^3.0.0-pre.3",
     "mobx": "^6.1.8",
     "npm": "^7.6.1",
-    "open": "^7.2.1"
+    "open": "^7.2.1",
+    "prismjs": "^1.23.0"
   },
   "devDependencies": {
     "@babel/core": "7.12.16",
     "@babel/preset-env": "7.12.16",
+    "@types/prismjs": "^1.16.3",
     "@types/validator": "13.1.0",
     "babel-loader": "8.2.2",
     "chokidar": "^3.5.0",

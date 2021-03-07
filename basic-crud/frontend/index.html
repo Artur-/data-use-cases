@@ -25,11 +25,131 @@
         padding-right: 3em;
       }
     </style>
-    <!-- prettier-ignore -->
     <style>
-    .tippy-box[data-animation=fade][data-state=hidden]{opacity:0}[data-tippy-root]{max-width:calc(100vw - 10px)}.tippy-box{position:relative;background-color:#333;color:#fff;border-radius:4px;font-size:14px;line-height:1.4;outline:0;transition-property:transform,visibility,opacity}.tippy-box[data-placement^=top]>.tippy-arrow{bottom:0}.tippy-box[data-placement^=top]>.tippy-arrow:before{bottom:-7px;left:0;border-width:8px 8px 0;border-top-color:initial;transform-origin:center top}.tippy-box[data-placement^=bottom]>.tippy-arrow{top:0}.tippy-box[data-placement^=bottom]>.tippy-arrow:before{top:-7px;left:0;border-width:0 8px 8px;border-bottom-color:initial;transform-origin:center bottom}.tippy-box[data-placement^=left]>.tippy-arrow{right:0}.tippy-box[data-placement^=left]>.tippy-arrow:before{border-width:8px 0 8px 8px;border-left-color:initial;right:-7px;transform-origin:center left}.tippy-box[data-placement^=right]>.tippy-arrow{left:0}.tippy-box[data-placement^=right]>.tippy-arrow:before{left:-7px;border-width:8px 8px 8px 0;border-right-color:initial;transform-origin:center right}.tippy-box[data-inertia][data-state=visible]{transition-timing-function:cubic-bezier(.54,1.5,.38,1.11)}.tippy-arrow{width:16px;height:16px;color:#333}.tippy-arrow:before{content:"";position:absolute;border-color:transparent;border-style:solid}.tippy-content{position:relative;padding:5px 9px;z-index:1}
+      /**
+        * okaidia theme for JavaScript, CSS and HTML
+        * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+        * @author ocodia
+        */
+
+      code[class*='language-'],
+      pre[class*='language-'] {
+        color: #f8f8f2;
+        background: none;
+        text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        font-size: 1em;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        word-wrap: normal;
+        line-height: 1.5;
+
+        -moz-tab-size: 4;
+        -o-tab-size: 4;
+        tab-size: 4;
+
+        -webkit-hyphens: none;
+        -moz-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
+      }
+
+      /* Code blocks */
+      pre[class*='language-'] {
+        padding: 1em;
+        margin: 0.5em 0;
+        overflow: auto;
+        border-radius: 0.3em;
+      }
+
+      :not(pre) > code[class*='language-'],
+      pre[class*='language-'] {
+        background: #272822;
+      }
+
+      /* Inline code */
+      :not(pre) > code[class*='language-'] {
+        padding: 0.1em;
+        border-radius: 0.3em;
+        white-space: normal;
+      }
+
+      .token.comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #8292a2;
+      }
+
+      .token.punctuation {
+        color: #f8f8f2;
+      }
+
+      .token.namespace {
+        opacity: 0.7;
+      }
+
+      .token.property,
+      .token.tag,
+      .token.constant,
+      .token.symbol,
+      .token.deleted {
+        color: #f92672;
+      }
+
+      .token.boolean,
+      .token.number {
+        color: #ae81ff;
+      }
+
+      .token.selector,
+      .token.attr-name,
+      .token.string,
+      .token.char,
+      .token.builtin,
+      .token.inserted {
+        color: #a6e22e;
+      }
+
+      .token.operator,
+      .token.entity,
+      .token.url,
+      .language-css .token.string,
+      .style .token.string,
+      .token.variable {
+        color: #f8f8f2;
+      }
+
+      .token.atrule,
+      .token.attr-value,
+      .token.function,
+      .token.class-name {
+        color: #e6db74;
+      }
+
+      .token.keyword {
+        color: #66d9ef;
+      }
+
+      .token.regex,
+      .token.important {
+        color: #fd971f;
+      }
+
+      .token.important,
+      .token.bold {
+        font-weight: bold;
+      }
+      .token.italic {
+        font-style: italic;
+      }
+
+      .token.entity {
+        cursor: help;
+      }
     </style>
-    <!-- index.ts is included here automatically (either by the dev server or during the build) -->
   </head>
 
   <body>
@@ -40,17 +160,14 @@
       <h2>Use case: A basic CRUD (grid + form) based on a single entity</h2>
       <div>
         Sources:
-        <source-view text="The view" file="basic-crud/frontend/the-view.ts"></source-view>
+        <source-view file="basic-crud/frontend/the-view.ts"></source-view>
         <source-view
-          text="Endpoint"
           file="basic-crud/src/main/java/com/vaadin/artur/datausecases/basiccrud/data/endpoint/ProductEndpoint.java"
         ></source-view>
         <source-view
-          text="Entity"
           file="basic-crud/src/main/java/com/vaadin/artur/datausecases/basiccrud/data/entity/Product.java"
         ></source-view>
         <source-view
-          text="The view"
           file="basic-crud/src/main/java/com/vaadin/artur/datausecases/basiccrud/data/service/ProductRepository.java"
         ></source-view>
       </div>

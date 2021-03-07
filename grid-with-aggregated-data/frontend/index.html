@@ -25,47 +25,151 @@
         padding-right: 3em;
       }
     </style>
-    <!-- index.ts is included here automatically (either by the dev server or during the build) -->
+    <style>
+      /**
+          * okaidia theme for JavaScript, CSS and HTML
+          * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+          * @author ocodia
+          */
+
+      code[class*='language-'],
+      pre[class*='language-'] {
+        color: #f8f8f2;
+        background: none;
+        text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        font-size: 1em;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        word-wrap: normal;
+        line-height: 1.5;
+
+        -moz-tab-size: 4;
+        -o-tab-size: 4;
+        tab-size: 4;
+
+        -webkit-hyphens: none;
+        -moz-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
+      }
+
+      /* Code blocks */
+      pre[class*='language-'] {
+        padding: 1em;
+        margin: 0.5em 0;
+        overflow: auto;
+        border-radius: 0.3em;
+      }
+
+      :not(pre) > code[class*='language-'],
+      pre[class*='language-'] {
+        background: #272822;
+      }
+
+      /* Inline code */
+      :not(pre) > code[class*='language-'] {
+        padding: 0.1em;
+        border-radius: 0.3em;
+        white-space: normal;
+      }
+
+      .token.comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #8292a2;
+      }
+
+      .token.punctuation {
+        color: #f8f8f2;
+      }
+
+      .token.namespace {
+        opacity: 0.7;
+      }
+
+      .token.property,
+      .token.tag,
+      .token.constant,
+      .token.symbol,
+      .token.deleted {
+        color: #f92672;
+      }
+
+      .token.boolean,
+      .token.number {
+        color: #ae81ff;
+      }
+
+      .token.selector,
+      .token.attr-name,
+      .token.string,
+      .token.char,
+      .token.builtin,
+      .token.inserted {
+        color: #a6e22e;
+      }
+
+      .token.operator,
+      .token.entity,
+      .token.url,
+      .language-css .token.string,
+      .style .token.string,
+      .token.variable {
+        color: #f8f8f2;
+      }
+
+      .token.atrule,
+      .token.attr-value,
+      .token.function,
+      .token.class-name {
+        color: #e6db74;
+      }
+
+      .token.keyword {
+        color: #66d9ef;
+      }
+
+      .token.regex,
+      .token.important {
+        color: #fd971f;
+      }
+
+      .token.important,
+      .token.bold {
+        font-weight: bold;
+      }
+      .token.italic {
+        font-style: italic;
+      }
+
+      .token.entity {
+        cursor: help;
+      }
+    </style>
   </head>
 
   <body>
     <github-corner>
-      <a
-        href="https://github.com/Artur-/data-use-cases/blob/master/grid-with-aggregated-data"
-      ></a>
+      <a href="https://github.com/Artur-/data-use-cases/blob/master/grid-with-aggregated-data"></a>
     </github-corner>
     <div class="header">
-      <h2>
-        Use case: Show custom data in a read only grid in an efficient way that
-        supports sorting and lazy loading
-      </h2>
-      <p>Data model:</p>
-      <div class="horiz">
-        <pre>
-public class Product extends AbstractEntity {
-  private String name;
-  private double price;
-  private String category;
-}</pre
-        >
-        <pre>
-public class SaleRow extends AbstractEntity {
-  @ManyToOne
-  private Sale sale;
-  @ManyToOne
-  private Product product;
-  private int count;
-  private double sum;
-}</pre
-        >
-        <pre>
-public class Sale extends AbstractEntity {
-  @OneToMany(cascade = CascadeType.ALL)
-  private List&lt;SaleRow> items;
-  private LocalDate date;
-}
-          </pre
-        >
+      <h2>Use case: Show custom data in a read only grid in an efficient way that supports sorting and lazy loading</h2>
+      <div>
+        Sources:
+        <source-view file="grid-with-aggregated-data/frontend/the-view.ts"></source-view>
+        <source-view
+          file="grid-with-aggregated-data/src/main/java/com/vaadin/artur/datausecases/gridwithaggregateddata/data/endpoint/ProductSalesEndpoint.java"
+        ></source-view>
+        <source-view
+          file="grid-with-aggregated-data/src/main/java/com/vaadin/artur/datausecases/gridwithaggregateddata/data/endpoint/ProductWithSales.java"
+        ></source-view>
+        <source-view
+          file="grid-with-aggregated-data/src/main/java/com/vaadin/artur/datausecases/gridwithaggregateddata/data/service/ProductRepository.java"
+        ></source-view>
       </div>
     </div>
     <the-view></the-view>
