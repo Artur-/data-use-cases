@@ -1,12 +1,5 @@
-import { MobxLitElement } from "@adobe/lit-mobx";
-import {
-  autorun,
-  IAutorunOptions,
-  IReactionDisposer,
-  IReactionOptions,
-  IReactionPublic,
-  reaction,
-} from "mobx";
+import { MobxLitElement } from '@adobe/lit-mobx';
+import { autorun, IAutorunOptions, IReactionDisposer, IReactionOptions, IReactionPublic, reaction } from 'mobx';
 
 export class MobxElement extends MobxLitElement {
   private disposers: IReactionDisposer[] = [];
@@ -28,10 +21,7 @@ export class MobxElement extends MobxLitElement {
    *
    * This should be called from `connectedCallback` to ensure that the reaction is active also if the element is attached again later.
    */
-  protected autorun(
-    view: (r: IReactionPublic) => any,
-    opts?: IAutorunOptions
-  ): void {
+  protected autorun(view: (r: IReactionPublic) => any, opts?: IAutorunOptions): void {
     this.disposers.push(autorun(view, opts));
   }
   disconnectedCallback() {

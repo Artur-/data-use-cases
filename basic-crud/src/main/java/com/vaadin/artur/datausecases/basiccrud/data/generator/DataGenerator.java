@@ -1,15 +1,13 @@
 package com.vaadin.artur.datausecases.basiccrud.data.generator;
 
+import com.vaadin.artur.datausecases.basiccrud.data.entity.Product;
+import com.vaadin.artur.datausecases.basiccrud.data.service.ProductRepository;
+import com.vaadin.flow.spring.annotation.SpringComponent;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-
-import com.vaadin.artur.datausecases.basiccrud.data.entity.Product;
-import com.vaadin.artur.datausecases.basiccrud.data.service.ProductRepository;
-import com.vaadin.flow.spring.annotation.SpringComponent;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -19,7 +17,6 @@ import org.vaadin.artur.exampledata.ExampleDataGenerator;
 
 @SpringComponent
 public class DataGenerator {
-
     private static final LocalDateTime REFERENCE_TIME = LocalDateTime.of(2021, 2, 24, 0, 0, 0);
     private static Random r = new Random(123);
 
@@ -47,5 +44,4 @@ public class DataGenerator {
             logger.info("Generated demo data");
         };
     }
-
 }

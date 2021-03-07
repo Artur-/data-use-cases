@@ -1,12 +1,10 @@
 package com.vaadin.artur.datausecases.basiccrud.data;
 
 import java.util.UUID;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class AbstractEntity {
-
     @Id
     @GeneratedValue
     private UUID id;

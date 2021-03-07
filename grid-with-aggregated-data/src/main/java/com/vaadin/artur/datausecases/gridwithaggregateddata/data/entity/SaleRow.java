@@ -1,10 +1,8 @@
 package com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity;
 
+import com.vaadin.artur.datausecases.gridwithaggregateddata.data.AbstractEntity;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.AbstractEntity;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,12 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SaleRow extends AbstractEntity {
-
     @ManyToOne
     private Sale sale;
+
     @ManyToOne
     private Product product;
+
     private int count;
     private double sum;
-
 }

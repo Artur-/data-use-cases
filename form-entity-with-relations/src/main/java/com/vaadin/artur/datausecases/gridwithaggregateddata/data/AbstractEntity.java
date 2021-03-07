@@ -3,7 +3,6 @@ package com.vaadin.artur.datausecases.gridwithaggregateddata.data;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class AbstractEntity {
-
     @Id
     @GeneratedValue
     private String id;

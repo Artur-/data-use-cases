@@ -1,9 +1,8 @@
 package com.vaadin.artur.datausecases.util;
 
-import org.springframework.data.domain.Pageable;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.domain.Pageable;
 
 // This class should be removed once https://github.com/vaadin/spring/issues/729 is
 // fixed
@@ -11,7 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FakePageable implements Pageable {
-
     private FakeSort sort;
     private int pageNumber;
     private int pageSize;
@@ -46,7 +44,6 @@ public class FakePageable implements Pageable {
     public boolean hasPrevious() {
         return getPageNumber() > 0;
     }
-
     // export type GridSorterDirection='asc'|'desc'| null;
 
     // export

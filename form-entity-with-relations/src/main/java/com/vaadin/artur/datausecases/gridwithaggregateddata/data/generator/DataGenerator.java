@@ -1,17 +1,15 @@
 package com.vaadin.artur.datausecases.gridwithaggregateddata.data.generator;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-
 import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.Category;
 import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.Product;
 import com.vaadin.artur.datausecases.gridwithaggregateddata.data.service.CategoryRepository;
 import com.vaadin.artur.datausecases.gridwithaggregateddata.data.service.ProductRepository;
 import com.vaadin.flow.spring.annotation.SpringComponent;
-
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +19,6 @@ import org.vaadin.artur.exampledata.ExampleDataGenerator;
 
 @SpringComponent
 public class DataGenerator {
-
     private static final LocalDateTime REFERENCE_TIME = LocalDateTime.of(2021, 2, 24, 0, 0, 0);
     private static Random r = new Random(123);
 
@@ -38,8 +35,10 @@ public class DataGenerator {
             logger.info("Generating demo data");
 
             logger.info("... generating 100 Category entities...");
-            ExampleDataGenerator<Category> categoryGenerator = new ExampleDataGenerator<>(Category.class,
-                    REFERENCE_TIME);
+            ExampleDataGenerator<Category> categoryGenerator = new ExampleDataGenerator<>(
+                Category.class,
+                REFERENCE_TIME
+            );
             // categoryGenerator.setData(Category::setId, DataType.UUID);
             categoryGenerator.setData(Category::setName, DataType.TWO_WORDS);
             List<Category> cat = categoryGenerator.create(100, seed);

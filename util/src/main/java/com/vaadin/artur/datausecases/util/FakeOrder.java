@@ -5,7 +5,6 @@ import org.springframework.data.domain.Sort.NullHandling;
 import org.springframework.data.domain.Sort.Order;
 
 public class FakeOrder extends Order {
-
     private Direction direction;
     private String property;
     private boolean ignoreCase;
@@ -58,5 +57,4 @@ public class FakeOrder extends Order {
     public boolean isDescending() {
         return this.direction.isDescending();
     }
-
 }

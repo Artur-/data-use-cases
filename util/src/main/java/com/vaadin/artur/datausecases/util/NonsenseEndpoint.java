@@ -5,7 +5,5 @@ import com.vaadin.flow.server.connect.Endpoint;
 @Endpoint
 public class NonsenseEndpoint {
 
-    public void nonsense(FakePageable f) {
-
-    }
+    public void nonsense(FakePageable f) {}
 }

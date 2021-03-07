@@ -1,13 +1,10 @@
 package com.vaadin.artur.datausecases.basiccrud.data.entity;
 
+import com.vaadin.artur.datausecases.basiccrud.data.AbstractEntity;
 import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
-
-import com.vaadin.artur.datausecases.basiccrud.data.AbstractEntity;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,5 +17,4 @@ public class Product extends AbstractEntity {
 
     @DecimalMin(value = "0.0", inclusive = false)
     private BigDecimal price;
-
 }

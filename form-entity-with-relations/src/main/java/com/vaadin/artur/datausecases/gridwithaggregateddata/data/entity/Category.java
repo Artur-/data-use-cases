@@ -1,10 +1,8 @@
 package com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity;
 
+import com.vaadin.artur.datausecases.gridwithaggregateddata.data.AbstractEntity;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
-
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.AbstractEntity;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Category extends AbstractEntity {
-  @NotEmpty(message = "The category must have a name")
-  private String name;
+    @NotEmpty(message = "The category must have a name")
+    private String name;
 }
