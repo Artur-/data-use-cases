@@ -1,17 +1,21 @@
 import { ModelConstructor } from '@vaadin/flow-frontend/form';
 import {
+  GridColumnElement,
   GridDataProvider,
   GridDataProviderCallback,
   GridDataProviderParams,
   GridElement,
+  GridItemModel,
   GridSorterDirection,
 } from '@vaadin/vaadin-grid';
 import '@vaadin/vaadin-grid/vaadin-grid-sort-column';
+import EntityReference from 'Frontend/generated/com/vaadin/artur/datausecases/manytoonecrud/Util/EntityReference';
+import StrippedProduct from 'Frontend/generated/com/vaadin/artur/datausecases/manytoonecrud/Util/StrippedProduct';
 import FakePageable from 'Frontend/generated/com/vaadin/artur/datausecases/util/FakePageable';
 import Sort from 'Frontend/generated/org/springframework/data/domain/Sort';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
 import NullHandling from 'Frontend/generated/org/springframework/data/domain/Sort/NullHandling';
-import { html } from 'lit';
+import { html, render } from 'lit';
 import { ChildPartInfo, directive, Directive, ElementPartInfo, PartInfo, PartType } from 'lit/directive';
 import { ListInterface } from './crud-interface';
 import { EndpointLazyList } from './lazy-list';
@@ -87,6 +91,36 @@ export const endpointData = directive(
     }
   }
 );
+export interface DataStore {
+  toText(reference: EntityReference): any;
+}
+export const renderer = directive(
+  class extends Directive {
+    partInfo: ElementPartInfo;
+    constructor(partInfo: PartInfo) {
+      super(partInfo);
+      if (partInfo.type !== PartType.ELEMENT) {
+        throw new Error('Use as <vaadin-grid-column ${renderer(...)}></vaadin-grid-column>');
+      }
+      this.partInfo = partInfo;
+    }
+    render(_Model: ModelConstructor<any, any>, property: string, dataStore: DataStore) {
+      const col = (this.partInfo as any).element;
+
+      // FIXME Info should be in model, not use property name
+      if (property === 'category') {
+        (col as GridColumnElement).renderer = (
+          root: HTMLElement,
+          _column?: GridColumnElement,
+          model?: GridItemModel
+        ) => {
+          const reference = (model!.item as StrippedProduct).category;
+          render(html`${dataStore.toText(reference)}`, root);
+        };
+      }
+    }
+  }
+);
 export const gridColumns = directive(
   class extends Directive {
     partInfo: ChildPartInfo;
@@ -97,12 +131,13 @@ export const gridColumns = directive(
       }
       this.partInfo = partInfo;
     }
-    render(Model: ModelConstructor<any, any>) {
+    render(Model: ModelConstructor<any, any>, dataStore: DataStore) {
       const properties = Object.keys(Object.getOwnPropertyDescriptors(Model.prototype)).filter(
         (p) => p !== 'constructor'
       );
-
-      return properties.map((p) => html`<vaadin-grid-sort-column path="${p}"></vaadin-grid-sort-column>`);
+      return properties.map(
+        (p) => html`<vaadin-grid-sort-column path="${p}" ${renderer(Model, p, dataStore)}></vaadin-grid-sort-column>`
+      );
     }
   }
 );

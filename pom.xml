@@ -141,6 +141,8 @@
     <modules>
         <module>util</module>
         <module>grid-with-aggregated-data</module>
+        <module>basic-crud</module>
+        <module>many-to-one-crud</module>
     </modules>
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
