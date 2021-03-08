@@ -35,7 +35,7 @@ public class DataGenerator {
 
             logger.info("... generating 1000 Product entities...");
             ExampleDataGenerator<Product> productGenerator = new ExampleDataGenerator<>(Product.class, REFERENCE_TIME);
-            productGenerator.setData(Product::setId, DataType.ID);
+            productGenerator.setData(Product::setId, DataType.UUID);
             productGenerator.setData(Product::setName, DataType.FOOD_PRODUCT_NAME);
             productGenerator.setData(Product::setPrice, DataType.PRICE);
             productGenerator.setData(Product::setCategory, DataType.WORD);
@@ -45,14 +45,15 @@ public class DataGenerator {
             logger.info("... generating sales...");
 
             ExampleDataGenerator<Sale> saleGenerator = new ExampleDataGenerator<>(Sale.class, REFERENCE_TIME);
-            saleGenerator.setData(Sale::setId, DataType.ID);
+            saleGenerator.setData(Sale::setId, DataType.UUID);
             List<Sale> sales = saleGenerator.create(500, 1);
             ExampleDataGenerator<SaleRow> saleRowGenerator = new ExampleDataGenerator<>(SaleRow.class, REFERENCE_TIME);
-            saleRowGenerator.setData(SaleRow::setId, DataType.ID);
+            saleRowGenerator.setData(SaleRow::setId, DataType.UUID);
             saleRowGenerator.setData(SaleRow::setSum, DataType.PRICE);
 
+            int seq = 0;
             for (Sale sale : sales) {
-                List<SaleRow> saleRows = saleRowGenerator.create(5, sale.getId());
+                List<SaleRow> saleRows = saleRowGenerator.create(5, seq++);
                 saleRows.forEach(saleRow -> {
                     Product p = oneOf(productNamePriceCategoryEntities);
                     saleRow.setSale(sale);

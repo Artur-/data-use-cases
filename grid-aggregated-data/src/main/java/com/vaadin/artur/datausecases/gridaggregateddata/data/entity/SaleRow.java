@@ -3,7 +3,7 @@ package com.vaadin.artur.datausecases.gridaggregateddata.data.entity;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-import com.vaadin.artur.datausecases.gridaggregateddata.data.AbstractEntity;
+import com.vaadin.artur.datausecases.util.AbstractEntity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,21 +1,35 @@
-package com.vaadin.artur.datausecases.gridaggregateddata.data;
+package com.vaadin.artur.datausecases.util;
+
+import java.util.UUID;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 @MappedSuperclass
 public abstract class AbstractEntity {
     @Id
     @GeneratedValue
-    private Integer id;
+    private UUID id;
 
-    public Integer getId() {
+    @Version
+    private int version;
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     @Override

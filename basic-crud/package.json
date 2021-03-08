@@ -12,7 +12,6 @@
       "@vaadin/vaadin-split-layout": "4.3.0",
       "@vaadin/vaadin-cookie-consent": "2.0.0",
       "@vaadin/vaadin-combo-box": "6.0.0",
-      "cdigit": "2.5.6",
       "@vaadin/vaadin-core-shrinkwrap": "19.0.0-beta4",
       "@vaadin/vaadin-upload": "5.0.0",
       "@vaadin/vaadin-dialog": "2.5.2",
@@ -27,7 +26,6 @@
       "@vaadin/vaadin-shrinkwrap": "19.0.0-beta4",
       "@vaadin/vaadin-date-time-picker": "2.0.0",
       "@vaadin/vaadin-ordered-layout": "1.4.0",
-      "chance": "1.1.7",
       "@vaadin/vaadin-login": "2.0.0",
       "@vaadin/vaadin-button": "2.4.0",
       "@vaadin/vaadin-date-picker": "5.0.0",
@@ -81,7 +79,7 @@
       "webpack-merge": "4.2.2",
       "extract-loader": "5.1.0"
     },
-    "hash": "588645804f2c739b77027c8163e85727347cee478769ad6cad7afaf58e145c86"
+    "hash": "2e9f3e4c2be3a62eef541a3b06ca23dc5b3f72fe67b58b0dfb6577bf04406579"
   },
   "dependencies": {
     "@adobe/lit-mobx": "^1.0.1",
@@ -131,8 +129,6 @@
     "@vaadin/vaadin-text-field": "3.0.1",
     "@vaadin/vaadin-time-picker": "3.0.0",
     "@vaadin/vaadin-upload": "5.0.0",
-    "cdigit": "2.5.6",
-    "chance": "1.1.7",
     "github-corner": "^2.0.3",
     "i": "^0.3.6",
     "lit": "2.0.0-pre.1",

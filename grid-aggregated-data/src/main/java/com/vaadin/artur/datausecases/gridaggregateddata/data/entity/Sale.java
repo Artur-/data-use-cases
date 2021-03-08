@@ -6,7 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import com.vaadin.artur.datausecases.gridaggregateddata.data.AbstractEntity;
+import com.vaadin.artur.datausecases.util.AbstractEntity;
 
 import lombok.Getter;
 import lombok.Setter;
