@@ -9,7 +9,7 @@
     </parent>
     <packaging>jar</packaging>
 
-    <artifactId>grid-with-aggregated-data</artifactId>
+    <artifactId>grid-aggregated-data</artifactId>
     <name>Grid with aggregated data</name>
 
 

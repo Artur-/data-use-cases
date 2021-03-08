@@ -1,11 +1,13 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity;
+package com.vaadin.artur.datausecases.gridaggregateddata.data.entity;
 
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.AbstractEntity;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+
+import com.vaadin.artur.datausecases.gridaggregateddata.data.AbstractEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 

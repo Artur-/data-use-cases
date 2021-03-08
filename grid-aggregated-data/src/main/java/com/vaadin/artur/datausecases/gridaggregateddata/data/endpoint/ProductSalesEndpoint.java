@@ -1,6 +1,6 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata.data.endpoint;
+package com.vaadin.artur.datausecases.gridaggregateddata.data.endpoint;
 
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.service.ProductRepository;
+import com.vaadin.artur.datausecases.gridaggregateddata.data.service.ProductRepository;
 import com.vaadin.artur.datausecases.util.FakePageable;
 import com.vaadin.artur.datausecases.util.ListInterface;
 import com.vaadin.flow.server.connect.Endpoint;

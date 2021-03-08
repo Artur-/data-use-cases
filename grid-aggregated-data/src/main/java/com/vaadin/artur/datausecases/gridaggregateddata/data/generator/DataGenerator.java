@@ -1,10 +1,10 @@
-package com.vaadin.artur.datausecases.gridwithaggregateddata.data.generator;
+package com.vaadin.artur.datausecases.gridaggregateddata.data.generator;
 
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.Product;
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.Sale;
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.entity.SaleRow;
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.service.ProductRepository;
-import com.vaadin.artur.datausecases.gridwithaggregateddata.data.service.SaleRepository;
+import com.vaadin.artur.datausecases.gridaggregateddata.data.entity.Product;
+import com.vaadin.artur.datausecases.gridaggregateddata.data.entity.Sale;
+import com.vaadin.artur.datausecases.gridaggregateddata.data.entity.SaleRow;
+import com.vaadin.artur.datausecases.gridaggregateddata.data.service.ProductRepository;
+import com.vaadin.artur.datausecases.gridaggregateddata.data.service.SaleRepository;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -39,9 +39,8 @@ public class DataGenerator {
             productGenerator.setData(Product::setName, DataType.FOOD_PRODUCT_NAME);
             productGenerator.setData(Product::setPrice, DataType.PRICE);
             productGenerator.setData(Product::setCategory, DataType.WORD);
-            List<Product> productNamePriceCategoryEntities = productRepository.saveAll(
-                productGenerator.create(1000, seed)
-            );
+            List<Product> productNamePriceCategoryEntities = productRepository
+                    .saveAll(productGenerator.create(1000, seed));
 
             logger.info("... generating sales...");
 
@@ -54,15 +53,13 @@ public class DataGenerator {
 
             for (Sale sale : sales) {
                 List<SaleRow> saleRows = saleRowGenerator.create(5, sale.getId());
-                saleRows.forEach(
-                    saleRow -> {
-                        Product p = oneOf(productNamePriceCategoryEntities);
-                        saleRow.setSale(sale);
-                        saleRow.setProduct(p);
-                        saleRow.setCount(r.nextInt(20));
-                        saleRow.setSum(saleRow.getCount() * p.getPrice());
-                    }
-                );
+                saleRows.forEach(saleRow -> {
+                    Product p = oneOf(productNamePriceCategoryEntities);
+                    saleRow.setSale(sale);
+                    saleRow.setProduct(p);
+                    saleRow.setCount(r.nextInt(20));
+                    saleRow.setSum(saleRow.getCount() * p.getPrice());
+                });
                 sale.setItems(saleRows);
             }
             saleRepository.saveAll(sales);
