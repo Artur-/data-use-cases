@@ -21,7 +21,7 @@ class EntityStore implements DataStore {
     this.data.Category = data.reduce((map: any, obj: T & AbstractEntity) => {
       map[obj.id] = obj;
       return map;
-    });
+    }, {});
   }
   toText(ref: EntityReference) {
     if (this.data[ref.type]) {
