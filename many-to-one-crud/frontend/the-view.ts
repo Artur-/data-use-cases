@@ -85,9 +85,8 @@ export class FormEntityWithRelations extends View {
     this.selected = [];
   }
   async save() {
-    // const saved =
-    await this.binder.submitTo(ProductEndpoint.update);
+    const saved = await this.binder.submitTo(ProductEndpoint.update);
     // TODO Handle optimistic locking errors
-    // this.products.refresh(saved);
+    this.products.refresh(saved);
   }
 }

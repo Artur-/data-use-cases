@@ -4,45 +4,55 @@ import java.lang.reflect.Field;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class EntityReference<T> {
 
-    private Class<T> type;
     private Optional<String> name; // Only for TS generator
-    @JsonIgnore
-    private T value;
     private String id;
 
-    public EntityReference(Class<T> type, T value) {
-        this.type = type;
-        this.value = value;
+    public EntityReference() {
+
     }
 
-    public String getId() {
+    public static <T> EntityReference<T> create(Class<T> type, T value) {
+
+        EntityReference<T> e = new EntityReference<>();
         if (AbstractEntity.class.isAssignableFrom(type)) {
-            return ((AbstractEntity) value).getId().toString();
+            e.id = ((AbstractEntity) value).getId().toString();
+        } else {
+            throw new IllegalStateException("Unknown type " + type.getName());
         }
-        throw new IllegalStateException("Unknown type " + type.getName());
-    }
 
-    public String getType() {
-        return type.getSimpleName();
-    }
-
-    public Optional<String> getName() {
         Optional<Field> textField = Stream.of(type.getDeclaredFields())
                 .filter(field -> field.getAnnotation(Text.class) != null).findFirst();
 
-        return textField.map(field -> {
+        e.name = textField.map(field -> {
             try {
                 field.setAccessible(true);
-                return field.get(this.value).toString();
-            } catch (IllegalArgumentException | IllegalAccessException e) {
-                e.printStackTrace();
+                Object o = field.get(value);
+                return o.toString();
+            } catch (IllegalArgumentException | IllegalAccessException ee) {
+                ee.printStackTrace();
                 return "ERR";
             }
         });
+
+        return e;
+
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setName(Optional<String> name) {
+        this.name = name;
+    }
+
+    public Optional<String> getName() {
+        return name;
+    }
 }

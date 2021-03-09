@@ -38,9 +38,10 @@ class EntityStore implements DataStore {
     if (ref.name) {
       return ref.name;
     }
-    if (this.data[ref.type]) {
+    const type = 'Category';
+    if (this.data[type]) {
       debugger;
-      const data: any = this.data[ref.type];
+      const data: any = this.data[type];
       if (data[ref.id]) {
         return entityToText(data[ref.id]);
       }

@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.persistence.EntityManager;
+
 import com.vaadin.artur.datausecases.manytoonecrud.Util;
 import com.vaadin.artur.datausecases.manytoonecrud.Util.Product;
+import com.vaadin.artur.datausecases.manytoonecrud.data.entity.ProductEntity;
 import com.vaadin.artur.datausecases.manytoonecrud.data.service.ProductRepository;
 import com.vaadin.artur.datausecases.util.FakePageable;
 import com.vaadin.artur.datausecases.util.GetInterface;
@@ -24,6 +27,9 @@ public class ProductEndpoint
     private ProductRepository repo;
 
     @Autowired
+    private EntityManager em;
+
+    @Autowired
     private Util util;
 
     @Override
@@ -37,9 +43,9 @@ public class ProductEndpoint
     }
 
     @Override
-    public Product update(Product entity) {
-        // return util.dropEntityRefs(repo.save(entity));
-        return entity;
+    public Product update(Product product) {
+        ProductEntity entity = product.toEntity(em);
+        return util.dropEntityRefs(repo.save(entity));
     }
 
     @Override
