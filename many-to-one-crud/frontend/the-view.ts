@@ -16,19 +16,19 @@ import { CategoryEndpoint } from 'Frontend/generated/CategoryEndpoint';
 import { ProductEndpoint } from 'Frontend/generated/ProductEndpoint';
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators';
-import CategoryModel from './generated/com/vaadin/artur/datausecases/manytoonecrud/data/entity/CategoryModel';
-import StrippedProduct from './generated/com/vaadin/artur/datausecases/manytoonecrud/Util/StrippedProduct';
-import StrippedProductModel from './generated/com/vaadin/artur/datausecases/manytoonecrud/Util/StrippedProductModel';
+import CategoryEntityModel from './generated/com/vaadin/artur/datausecases/manytoonecrud/data/entity/CategoryEntityModel';
+import Product from './generated/com/vaadin/artur/datausecases/manytoonecrud/Util/Product';
+import ProductModel from './generated/com/vaadin/artur/datausecases/manytoonecrud/Util/ProductModel';
 import { entityStore, selectOptions } from './util';
 
 @customElement('the-view')
 export class FormEntityWithRelations extends View {
-  private binder: Binder<StrippedProduct, StrippedProductModel> = new Binder(this, StrippedProductModel);
+  private binder: Binder<Product, ProductModel> = new Binder(this, ProductModel);
 
-  private products: EndpointLazyList<StrippedProduct> = EndpointLazyList.connect(ProductEndpoint);
+  private products: EndpointLazyList<Product> = EndpointLazyList.connect(ProductEndpoint);
 
   @state()
-  selected: StrippedProduct[] = [];
+  selected: Product[] = [];
 
   render() {
     return html`
@@ -36,13 +36,13 @@ export class FormEntityWithRelations extends View {
         <vaadin-grid
           ${gridData(this.products)}
           @active-item-changed="${(e: GridActiveItemChanged) => {
-            const item = e.detail.value as StrippedProduct;
+            const item = e.detail.value as Product;
             this.selected = item ? [item] : [];
           }}"
           .selectedItems=${this.selected}
           @selected-items-changed="${this.itemSelected}"
         >
-          ${gridColumns(StrippedProductModel, entityStore)}
+          ${gridColumns(ProductModel, entityStore)}
         </vaadin-grid>
         <vaadin-vertical-layout>
           <vaadin-text-field label="Name" ${field(this.binder.model.name)}></vaadin-text-field>
@@ -50,7 +50,7 @@ export class FormEntityWithRelations extends View {
           <vaadin-select
             label="Category"
             ${field(this.binder.model.category.id)}
-            ${selectOptions(CategoryEndpoint, CategoryModel, entityStore)}
+            ${selectOptions(CategoryEndpoint, CategoryEntityModel, entityStore)}
           >
           </vaadin-select>
           <vaadin-horizontal-layout>
@@ -64,7 +64,7 @@ export class FormEntityWithRelations extends View {
   }
 
   async itemSelected(e: GridSelectedItemsChanged) {
-    const item = e.detail.value as StrippedProduct[];
+    const item = e.detail.value as Product[];
     if (item.length > 0) {
       const product = item[0];
       if (product) {

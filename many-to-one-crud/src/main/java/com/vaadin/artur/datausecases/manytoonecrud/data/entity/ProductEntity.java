@@ -16,7 +16,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Product extends AbstractEntity {
+public class ProductEntity extends AbstractEntity {
     @NotEmpty(message = "The product must have a name")
     private String name;
 
@@ -25,5 +25,5 @@ public class Product extends AbstractEntity {
 
     @ManyToOne
     @NotNull
-    private Category category;
+    private CategoryEntity category;
 }

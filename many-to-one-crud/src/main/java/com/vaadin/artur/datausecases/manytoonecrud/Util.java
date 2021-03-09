@@ -18,10 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.vaadin.artur.datausecases.manytoonecrud.data.entity.Category;
-import com.vaadin.artur.datausecases.manytoonecrud.data.entity.Name;
-import com.vaadin.artur.datausecases.manytoonecrud.data.entity.Product;
-import com.vaadin.artur.datausecases.manytoonecrud.data.entity.Text;
+import com.vaadin.artur.datausecases.manytoonecrud.data.entity.CategoryEntity;
+import com.vaadin.artur.datausecases.manytoonecrud.data.entity.ProductEntity;
 import com.vaadin.artur.datausecases.util.AbstractEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +50,8 @@ public class Util {
         }
 
         public String getId() {
-            if (type == Category.class) {
-                return ((Category) value).getId().toString();
+            if (type == CategoryEntity.class) {
+                return ((CategoryEntity) value).getId().toString();
             }
             throw new IllegalStateException("Unknown type " + type.getName());
         }
@@ -95,7 +93,7 @@ public class Util {
 
     }
 
-    public static class StrippedProduct extends AbstractEntity {
+    public static class Product extends AbstractEntity {
         @NotEmpty(message = "The product must have a name")
         private String name;
 
@@ -104,25 +102,25 @@ public class Util {
 
         // TODO How do you transform validation annotations? Which are valid for refs?
         @NotNull
-        private EntityReference<Category> category;
+        private EntityReference<CategoryEntity> category;
 
-        public StrippedProduct(Product p) {
+        public Product(ProductEntity p) {
             this.setVersion(p.getVersion());
             setId(p.getId());
             this.name = p.getName();
             this.price = p.getPrice();
             // The id attribute can be found from the entity manager meta model
-            this.category = new EntityReference(Category.class, p.getCategory());
+            this.category = new EntityReference(CategoryEntity.class, p.getCategory());
 
         }
     }
 
-    public List<StrippedProduct> dropEntityRefs(List<Product> content) {
+    public List<Product> dropEntityRefs(List<ProductEntity> content) {
         return content.stream().map(product -> dropEntityRefs(product)).collect(Collectors.toList());
     }
 
-    public StrippedProduct dropEntityRefs(Product product) {
-        return new StrippedProduct(product);
+    public Product dropEntityRefs(ProductEntity product) {
+        return new Product(product);
     }
 
 }

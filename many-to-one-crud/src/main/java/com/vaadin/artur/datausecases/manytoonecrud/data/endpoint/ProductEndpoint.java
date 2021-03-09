@@ -5,8 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.vaadin.artur.datausecases.manytoonecrud.Util;
-import com.vaadin.artur.datausecases.manytoonecrud.Util.StrippedProduct;
-import com.vaadin.artur.datausecases.manytoonecrud.data.entity.Product;
+import com.vaadin.artur.datausecases.manytoonecrud.Util.Product;
 import com.vaadin.artur.datausecases.manytoonecrud.data.service.ProductRepository;
 import com.vaadin.artur.datausecases.util.FakePageable;
 import com.vaadin.artur.datausecases.util.GetInterface;
@@ -19,8 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Endpoint
 @AnonymousAllowed
-public class ProductEndpoint implements ListInterface<StrippedProduct>, GetInterface<StrippedProduct, UUID>,
-        WriteInterface<StrippedProduct, UUID> {
+public class ProductEndpoint
+        implements ListInterface<Product>, GetInterface<Product, UUID>, WriteInterface<Product, UUID> {
     @Autowired
     private ProductRepository repo;
 
@@ -28,17 +27,17 @@ public class ProductEndpoint implements ListInterface<StrippedProduct>, GetInter
     private Util util;
 
     @Override
-    public List<StrippedProduct> list(FakePageable pageable) {
+    public List<Product> list(FakePageable pageable) {
         return util.dropEntityRefs(repo.findAll(pageable).getContent());
     }
 
     @Override
-    public Optional<StrippedProduct> get(UUID id) {
+    public Optional<Product> get(UUID id) {
         return repo.findById(id).map(util::dropEntityRefs);
     }
 
     @Override
-    public StrippedProduct update(StrippedProduct entity) {
+    public Product update(Product entity) {
         // return util.dropEntityRefs(repo.save(entity));
         return entity;
     }

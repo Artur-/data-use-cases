@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
-import com.vaadin.artur.datausecases.manytoonecrud.data.entity.Category;
-import com.vaadin.artur.datausecases.manytoonecrud.data.entity.Product;
+import com.vaadin.artur.datausecases.manytoonecrud.data.entity.CategoryEntity;
+import com.vaadin.artur.datausecases.manytoonecrud.data.entity.ProductEntity;
 import com.vaadin.artur.datausecases.manytoonecrud.data.service.CategoryRepository;
 import com.vaadin.artur.datausecases.manytoonecrud.data.service.ProductRepository;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -36,19 +36,20 @@ public class DataGenerator {
             logger.info("Generating demo data");
 
             logger.info("... generating 50 Category entities...");
-            ExampleDataGenerator<Category> categoryGenerator = new ExampleDataGenerator<>(Category.class,
+            ExampleDataGenerator<CategoryEntity> categoryGenerator = new ExampleDataGenerator<>(CategoryEntity.class,
                     REFERENCE_TIME);
-            categoryGenerator.setData(Category::setId, DataType.UUID);
-            categoryGenerator.setData(Category::setName, DataType.FOOD_PRODUCT_NAME);
+            categoryGenerator.setData(CategoryEntity::setId, DataType.UUID);
+            categoryGenerator.setData(CategoryEntity::setName, DataType.FOOD_PRODUCT_NAME);
 
-            List<Category> categories = categoryRepository.saveAll(categoryGenerator.create(50, seed));
+            List<CategoryEntity> categories = categoryRepository.saveAll(categoryGenerator.create(50, seed));
 
             logger.info("... generating 1000 Product entities...");
-            ExampleDataGenerator<Product> productGenerator = new ExampleDataGenerator<>(Product.class, REFERENCE_TIME);
-            productGenerator.setData(Product::setId, DataType.UUID);
-            productGenerator.setData(Product::setName, DataType.FOOD_PRODUCT_NAME);
+            ExampleDataGenerator<ProductEntity> productGenerator = new ExampleDataGenerator<>(ProductEntity.class,
+                    REFERENCE_TIME);
+            productGenerator.setData(ProductEntity::setId, DataType.UUID);
+            productGenerator.setData(ProductEntity::setName, DataType.FOOD_PRODUCT_NAME);
 
-            List<Product> products = productGenerator.create(1000, seed);
+            List<ProductEntity> products = productGenerator.create(1000, seed);
             products.forEach(product -> product.setPrice(new BigDecimal(r.nextDouble() * 1000)));
             products.forEach(product -> product.setCategory(oneOf(categories)));
 
