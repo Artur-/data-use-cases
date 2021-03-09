@@ -6,8 +6,8 @@ import { SelectElement } from '@vaadin/vaadin-select';
 import { html, render } from 'lit';
 import { directive, Directive, ElementPartInfo, PartInfo, PartType } from 'lit/directive';
 import { ModelConstructor } from '../target/flow-frontend/form';
-import EntityReference from './generated/com/vaadin/artur/datausecases/manytoonecrud/Util/EntityReference';
 import AbstractEntity from './generated/com/vaadin/artur/datausecases/util/AbstractEntity';
+import EntityReference from './generated/com/vaadin/artur/datausecases/util/EntityReference';
 
 const entityToText = (entity: any) => {
   // FIXME This is Category specific

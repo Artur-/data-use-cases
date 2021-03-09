@@ -9,8 +9,7 @@ import {
   GridSorterDirection,
 } from '@vaadin/vaadin-grid';
 import '@vaadin/vaadin-grid/vaadin-grid-sort-column';
-import EntityReference from 'Frontend/generated/com/vaadin/artur/datausecases/manytoonecrud/Util/EntityReference';
-import StrippedProduct from 'Frontend/generated/com/vaadin/artur/datausecases/manytoonecrud/Util/StrippedProduct';
+import EntityReference from 'Frontend/generated/com/vaadin/artur/datausecases/util/EntityReference';
 import FakePageable from 'Frontend/generated/com/vaadin/artur/datausecases/util/FakePageable';
 import Sort from 'Frontend/generated/org/springframework/data/domain/Sort';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
@@ -114,7 +113,7 @@ export const renderer = directive(
           _column?: GridColumnElement,
           model?: GridItemModel
         ) => {
-          const reference = (model!.item as StrippedProduct).category;
+          const reference = (model!.item as any).category;
           render(html`${dataStore.toText(reference)}`, root);
         };
       }

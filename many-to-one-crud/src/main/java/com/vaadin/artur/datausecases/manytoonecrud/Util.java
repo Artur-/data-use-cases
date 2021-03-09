@@ -1,12 +1,8 @@
 package com.vaadin.artur.datausecases.manytoonecrud;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
@@ -14,16 +10,12 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.vaadin.artur.datausecases.manytoonecrud.data.entity.CategoryEntity;
 import com.vaadin.artur.datausecases.manytoonecrud.data.entity.ProductEntity;
 import com.vaadin.artur.datausecases.util.AbstractEntity;
+import com.vaadin.artur.datausecases.util.EntityReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,63 +26,6 @@ public class Util {
 
     public <T> EntityType<T> getEntityType(Class<T> clazz) {
         return em.getMetamodel().entity(clazz);
-    }
-
-    public static class EntityReference<T> {
-
-        private Class<T> type;
-        private Optional<String> name; // Only for TS generator
-        @JsonIgnore
-        private T value;
-        private String id;
-
-        public EntityReference(Class<T> type, T value) {
-            this.type = type;
-            this.value = value;
-        }
-
-        public String getId() {
-            if (type == CategoryEntity.class) {
-                return ((CategoryEntity) value).getId().toString();
-            }
-            throw new IllegalStateException("Unknown type " + type.getName());
-        }
-
-        public String getType() {
-            return type.getSimpleName();
-        }
-
-        public Optional<String> getName() {
-            Optional<Field> textField = Stream.of(type.getDeclaredFields())
-                    .filter(field -> field.getAnnotation(Text.class) != null).findFirst();
-
-            return textField.map(field -> {
-                try {
-                    field.setAccessible(true);
-                    return field.get(this.value).toString();
-                } catch (IllegalArgumentException | IllegalAccessException e) {
-                    e.printStackTrace();
-                    return "ERR";
-                }
-            });
-        }
-
-    }
-
-    @JsonComponent
-    public class UserJsonSerializer extends JsonSerializer<EntityReference<?>> {
-
-        @Override
-        public void serialize(EntityReference<?> value, JsonGenerator gen, SerializerProvider serializers)
-                throws IOException {
-            // gen.writeString(value.getId());
-            gen.writeStartObject();
-            gen.writeStringField("type", value.getType());
-            gen.writeStringField("name", value.getName().orElse(""));
-            gen.writeStringField("id", value.getId());
-            gen.writeEndObject();
-        }
-
     }
 
     public static class Product extends AbstractEntity {

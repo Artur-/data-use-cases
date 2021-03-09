@@ -1,4 +1,4 @@
-package com.vaadin.artur.datausecases.manytoonecrud;
+package com.vaadin.artur.datausecases.util;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
