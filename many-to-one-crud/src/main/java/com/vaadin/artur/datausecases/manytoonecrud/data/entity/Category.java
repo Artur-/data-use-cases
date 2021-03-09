@@ -13,5 +13,6 @@ import lombok.Setter;
 @Setter
 public class Category extends AbstractEntity {
     @NotEmpty(message = "The category must have a name")
+    @Text
     private String name;
 }

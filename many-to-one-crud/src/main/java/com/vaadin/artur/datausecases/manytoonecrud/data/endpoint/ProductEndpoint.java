@@ -19,8 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Endpoint
 @AnonymousAllowed
-public class ProductEndpoint
-        implements ListInterface<StrippedProduct>, GetInterface<Product, UUID>, WriteInterface<Product, UUID> {
+public class ProductEndpoint implements ListInterface<StrippedProduct>, GetInterface<StrippedProduct, UUID>,
+        WriteInterface<StrippedProduct, UUID> {
     @Autowired
     private ProductRepository repo;
 
@@ -33,13 +33,14 @@ public class ProductEndpoint
     }
 
     @Override
-    public Optional<Product> get(UUID id) {
-        return repo.findById(id);
+    public Optional<StrippedProduct> get(UUID id) {
+        return repo.findById(id).map(util::dropEntityRefs);
     }
 
     @Override
-    public Product update(Product entity) {
-        return repo.save(entity);
+    public StrippedProduct update(StrippedProduct entity) {
+        // return util.dropEntityRefs(repo.save(entity));
+        return entity;
     }
 
     @Override
