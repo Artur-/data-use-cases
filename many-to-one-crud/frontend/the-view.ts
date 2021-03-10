@@ -87,6 +87,7 @@ export class FormEntityWithRelations extends View {
   async save() {
     const saved = await this.binder.submitTo(ProductEndpoint.update);
     // TODO Handle optimistic locking errors
+    this.binder.clear();
     this.products.refresh(saved);
   }
 }
