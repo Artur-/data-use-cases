@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class Util {
 
+    // TODO This whole class would be a custom Jackson serializer
     public static class Product extends AbstractEntity {
         @NotEmpty(message = "The product must have a name")
         private String name;

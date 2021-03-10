@@ -39,7 +39,7 @@ public class DataGenerator {
             ExampleDataGenerator<CategoryEntity> categoryGenerator = new ExampleDataGenerator<>(CategoryEntity.class,
                     REFERENCE_TIME);
             categoryGenerator.setData(CategoryEntity::setId, DataType.UUID);
-            categoryGenerator.setData(CategoryEntity::setName, DataType.FOOD_PRODUCT_NAME);
+            categoryGenerator.setData(CategoryEntity::setName, DataType.BOOK_GENRE);
 
             List<CategoryEntity> categories = categoryRepository.saveAll(categoryGenerator.create(50, seed));
 
@@ -47,7 +47,7 @@ public class DataGenerator {
             ExampleDataGenerator<ProductEntity> productGenerator = new ExampleDataGenerator<>(ProductEntity.class,
                     REFERENCE_TIME);
             productGenerator.setData(ProductEntity::setId, DataType.UUID);
-            productGenerator.setData(ProductEntity::setName, DataType.FOOD_PRODUCT_NAME);
+            productGenerator.setData(ProductEntity::setName, DataType.BOOK_TITLE);
 
             List<ProductEntity> products = productGenerator.create(1000, seed);
             products.forEach(product -> product.setPrice(new BigDecimal(r.nextDouble() * 1000)));

@@ -1,8 +1,12 @@
 package com.vaadin.artur.datausecases.util;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import com.vaadin.flow.internal.ReflectTools;
 
 public class EntityReference<T> {
 
@@ -22,19 +26,25 @@ public class EntityReference<T> {
             throw new IllegalStateException("Unknown type " + type.getName());
         }
 
-        Optional<Field> textField = Stream.of(type.getDeclaredFields())
+        Optional<Field> nameField = Stream.of(type.getDeclaredFields())
                 .filter(field -> field.getAnnotation(Text.class) != null).findFirst();
-
-        e.name = textField.map(field -> {
+        if (nameField.isPresent()) {
+            Optional<Method> getter = ReflectTools.getGetter(type, nameField.get().getName());
             try {
-                field.setAccessible(true);
-                Object o = field.get(value);
-                return o.toString();
-            } catch (IllegalArgumentException | IllegalAccessException ee) {
+                Object v;
+                if (getter.isPresent()) {
+                    v = getter.get().invoke(value);
+                } else {
+                    Field field = nameField.get();
+                    field.setAccessible(true);
+                    v = field.get(value);
+                }
+                e.name = Optional.ofNullable(v == null ? null : v.toString());
+            } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException ee) {
                 ee.printStackTrace();
-                return "ERR";
+                e.name = Optional.empty();
             }
-        });
+        }
 
         return e;
 
