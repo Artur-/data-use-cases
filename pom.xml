@@ -10,8 +10,7 @@
 
     <properties>
         <java.version>15</java.version>
-        <vaadin.version>19.0.0.beta4</vaadin.version>
-        <flow.version>7.0.lit2-SNAPSHOT</flow.version>
+        <vaadin.version>20.0.lit2-SNAPSHOT</vaadin.version>
         <util.module>false</util.module>
     </properties>
 
@@ -67,13 +66,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-bom</artifactId>
-                <version>${flow.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
@@ -140,7 +132,7 @@
     </dependencies>
     <modules>
         <module>util</module>
-        <module>grid-with-aggregated-data</module>
+        <module>grid-aggregated-data</module>
         <module>basic-crud</module>
         <module>many-to-one-crud</module>
     </modules>
@@ -155,8 +147,8 @@
             -->
             <plugin>
                 <groupId>com.vaadin</groupId>
-                <artifactId>flow-maven-plugin</artifactId>
-                <version>${flow.version}</version>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <version>${vaadin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -213,8 +205,8 @@
                 <plugins>
                     <plugin>
                         <groupId>com.vaadin</groupId>
-                        <artifactId>flow-maven-plugin</artifactId>
-                        <version>${flow.version}</version>
+                        <artifactId>vaadin-maven-plugin</artifactId>
+                        <version>${vaadin.version}</version>
                         <executions>
                             <execution>
                                 <goals>
