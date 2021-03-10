@@ -42,7 +42,7 @@ export class FormEntityWithRelations extends View {
           .selectedItems=${this.selected}
           @selected-items-changed="${this.itemSelected}"
         >
-          ${gridColumns(ProductModel, entityStore)}
+          ${gridColumns(ProductModel)}
         </vaadin-grid>
         <vaadin-vertical-layout>
           <vaadin-text-field label="Name" ${field(this.binder.model.name)}></vaadin-text-field>
