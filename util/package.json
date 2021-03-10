@@ -11,7 +11,6 @@
       "@vaadin/vaadin-split-layout": "4.3.0",
       "@vaadin/vaadin-combo-box": "6.0.0",
       "@vaadin/vaadin-cookie-consent": "2.0.0",
-      "@vaadin/vaadin-core-shrinkwrap": "19.0.0-beta4",
       "@vaadin/vaadin-upload": "5.0.0",
       "@vaadin/vaadin-dialog": "2.5.2",
       "@vaadin/vaadin-select": "3.0.0",
@@ -22,7 +21,6 @@
       "@vaadin/vaadin-charts": "8.0.1",
       "@vaadin/vaadin-grid-pro": "3.0.0",
       "@vaadin/vaadin-progress-bar": "1.3.0",
-      "@vaadin/vaadin-shrinkwrap": "19.0.0-beta4",
       "@vaadin/vaadin-date-time-picker": "2.0.0",
       "@vaadin/vaadin-ordered-layout": "1.4.0",
       "@vaadin/vaadin-login": "2.0.0",
@@ -48,7 +46,8 @@
       "@vaadin/vaadin-material-styles": "1.3.2",
       "open": "^7.2.1",
       "@vaadin/vaadin-rich-text-editor": "2.0.0",
-      "lit": "2.0.0-pre.1"
+      "lit": "2.0.0-pre.1",
+      "@vaadin/vaadin-messages": "2.0.0-alpha1"
     },
     "devDependencies": {
       "css-loader": "4.2.1",
@@ -79,10 +78,9 @@
       "@babel/preset-env": "7.12.16",
       "@babel/core": "7.12.16"
     },
-    "hash": "d6c624cff124b5f974e3278299acbbb973b7451fbe43afe6ad99eea6038f7d2e"
+    "hash": "bd71d46b0199bbffe48b1112f04c03f1687cc025e586f7532da7d5146ba9f102"
   },
   "dependencies": {
-    "@adobe/lit-mobx": "^1.0.1",
     "@polymer/iron-icon": "3.0.1",
     "@polymer/iron-list": "3.1.0",
     "@polymer/polymer": "3.2.0",
@@ -100,7 +98,6 @@
     "@vaadin/vaadin-confirm-dialog": "2.0.0",
     "@vaadin/vaadin-context-menu": "5.0.0",
     "@vaadin/vaadin-cookie-consent": "2.0.0",
-    "@vaadin/vaadin-core-shrinkwrap": "19.0.0-beta4",
     "@vaadin/vaadin-crud": "2.0.0",
     "@vaadin/vaadin-custom-field": "2.0.0",
     "@vaadin/vaadin-date-picker": "5.0.0",
@@ -117,18 +114,19 @@
     "@vaadin/vaadin-lumo-styles": "1.6.1",
     "@vaadin/vaadin-material-styles": "1.3.2",
     "@vaadin/vaadin-menu-bar": "2.0.0",
+    "@vaadin/vaadin-messages": "2.0.0-alpha1",
     "@vaadin/vaadin-notification": "1.6.1",
     "@vaadin/vaadin-ordered-layout": "1.4.0",
     "@vaadin/vaadin-progress-bar": "1.3.0",
     "@vaadin/vaadin-radio-button": "1.5.1",
     "@vaadin/vaadin-rich-text-editor": "2.0.0",
     "@vaadin/vaadin-select": "3.0.0",
-    "@vaadin/vaadin-shrinkwrap": "19.0.0-beta4",
     "@vaadin/vaadin-split-layout": "4.3.0",
     "@vaadin/vaadin-tabs": "4.0.0",
     "@vaadin/vaadin-text-field": "3.0.1",
     "@vaadin/vaadin-time-picker": "3.0.0",
     "@vaadin/vaadin-upload": "5.0.0",
+    "a-lit-mobx": "^2.0.0-pre.1",
     "lit": "2.0.0-pre.1",
     "mobx": "^6.1.8",
     "open": "^7.2.1",

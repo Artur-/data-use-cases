@@ -1,4 +1,4 @@
-import { MobxLitElement } from '@adobe/lit-mobx';
+import { MobxLitElement } from 'a-lit-mobx';
 import { autorun, IAutorunOptions, IReactionDisposer, IReactionOptions, IReactionPublic, reaction } from 'mobx';
 
 export class MobxElement extends MobxLitElement {
