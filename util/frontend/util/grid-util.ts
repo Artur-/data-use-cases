@@ -135,7 +135,12 @@ export const gridColumns = directive(
         (p) => p !== 'constructor'
       );
       return properties.map(
-        (p) => html`<vaadin-grid-sort-column path="${p}" ${renderer(Model, p, dataStore)}></vaadin-grid-sort-column>`
+        (p) =>
+          html`<vaadin-grid-sort-column
+            auto-width
+            path="${p}"
+            ${renderer(Model, p, dataStore)}
+          ></vaadin-grid-sort-column>`
       );
     }
   }
