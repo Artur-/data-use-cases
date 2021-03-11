@@ -36,9 +36,9 @@ public class DataGenerator {
             logger.info("... generating 1000 Product entities...");
             ExampleDataGenerator<Product> productGenerator = new ExampleDataGenerator<>(Product.class, REFERENCE_TIME);
             productGenerator.setData(Product::setId, DataType.UUID);
-            productGenerator.setData(Product::setName, DataType.FOOD_PRODUCT_NAME);
+            productGenerator.setData(Product::setName, DataType.BOOK_TITLE);
             productGenerator.setData(Product::setPrice, DataType.PRICE);
-            productGenerator.setData(Product::setCategory, DataType.WORD);
+            productGenerator.setData(Product::setCategory, DataType.BOOK_GENRE);
             List<Product> productNamePriceCategoryEntities = productRepository
                     .saveAll(productGenerator.create(1000, seed));
 
