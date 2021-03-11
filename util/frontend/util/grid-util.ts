@@ -133,7 +133,13 @@ export const gridColumns = directive(
         (p) => p !== 'constructor'
       );
       return properties.map(
-        (p) => html`<vaadin-grid-sort-column auto-width path="${p}"></vaadin-grid-sort-column>`
+        (p) => {
+          if (p === 'category') {
+            return html`<vaadin-grid-sort-column auto-width path="${p}.name"></vaadin-grid-sort-column>`;
+          } else {
+            return html`<vaadin-grid-sort-column auto-width path="${p}"></vaadin-grid-sort-column>`;
+          }
+        }
         // ${renderer(Model, p, dataStore)}
       );
     }
