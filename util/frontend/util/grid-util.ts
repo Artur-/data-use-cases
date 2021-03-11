@@ -8,6 +8,7 @@ import {
 } from '@vaadin/vaadin-grid';
 import '@vaadin/vaadin-grid/vaadin-grid-sort-column';
 import EntityReference from 'Frontend/generated/com/vaadin/artur/datausecases/util/EntityReference';
+import EntityReferenceModel from 'Frontend/generated/com/vaadin/artur/datausecases/util/EntityReferenceModel';
 import FakePageable from 'Frontend/generated/com/vaadin/artur/datausecases/util/FakePageable';
 import Sort from 'Frontend/generated/org/springframework/data/domain/Sort';
 import Direction from 'Frontend/generated/org/springframework/data/domain/Sort/Direction';
@@ -105,7 +106,7 @@ export interface DataStore {
 //       const col = (this.partInfo as any).element;
 //
 // FIXME Info should be in model, not use property name
-// if (property === 'category') {
+// if (isEntityReference(_Model, property) {
 //   (col as GridColumnElement).renderer = (
 //     root: HTMLElement,
 //     _column?: GridColumnElement,
@@ -118,6 +119,11 @@ export interface DataStore {
 //     }
 //   }
 // );
+const isEntityReference = (Model: ModelConstructor<any, any>, property: string) => {
+  const m = new Model({ value: undefined }, 'value', false);
+  return m[property] instanceof EntityReferenceModel;
+};
+
 export const gridColumns = directive(
   class extends Directive {
     partInfo: ChildPartInfo;
@@ -134,7 +140,7 @@ export const gridColumns = directive(
       );
       return properties.map(
         (p) => {
-          if (p === 'category') {
+          if (isEntityReference(Model, p)) {
             return html`<vaadin-grid-sort-column auto-width path="${p}.name"></vaadin-grid-sort-column>`;
           } else {
             return html`<vaadin-grid-sort-column auto-width path="${p}"></vaadin-grid-sort-column>`;
