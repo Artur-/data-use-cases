@@ -1,0 +1,21 @@
+@import url('prismjs/themes/prism-okaidia.css');
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.header {
+  margin: 0;
+  padding: 1em;
+  background: lightgrey;
+  font-family: var(--lumo-font-family);
+}
+.horiz {
+  display: flex;
+  flex-direction: row;
+}
+pre {
+  padding-right: 3em;
+}
